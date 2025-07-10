@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import Card from '../../ui/Card';
 import Button from '../../ui/Button';
@@ -20,31 +22,42 @@ const YoungChildExacerbationSeverityStep: React.FC = () => {
     onClick: () => void;
     variant: 'warning' | 'danger';
     className?: string;
-  }> = ({ title, icon, criteria, buttonLabel, onClick, variant, className }) => (
-    <div className={`p-5 border-2 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col ${className}`}>
-      <div className="flex items-center mb-3">
-        {React.cloneElement(icon as React.ReactElement<{ size?: number; className?: string }>, { 
-            size: 24, 
-            className: `mr-2 ${(icon.props as any)?.className || ''}`.trim() 
-        })}
-        <h3 className={`text-xl font-semibold`}>{title}</h3>
+  }> = ({ title, icon, criteria, buttonLabel, onClick, variant, className }) => {
+    let clonedIcon = null;
+    if (icon) {
+        const iconProps: { size: number, className: string } = {
+            size: 24,
+            className: 'mr-2',
+        };
+        const existingClassName = (icon.props as any).className;
+        if (existingClassName) {
+            iconProps.className = iconProps.className + ' ' + existingClassName;
+        }
+        clonedIcon = React.cloneElement(icon as React.ReactElement<any>, iconProps);
+    }
+    return (
+      <div className={`p-5 border-2 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col ${className}`}>
+        <div className="flex items-center mb-3">
+          {clonedIcon}
+          <h3 className={`text-xl font-semibold`}>{title}</h3>
+        </div>
+        <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 pl-2 mb-4 flex-grow">
+          {criteria.map((item, index) => <li key={index}>{item}</li>)}
+        </ul>
+        <Button 
+          onClick={onClick} 
+          fullWidth 
+          variant={variant}
+          rightIcon={<ChevronRight />}
+          aria-label={buttonLabel}
+          className="mt-auto"
+          size="lg"
+        >
+          {buttonLabel}
+        </Button>
       </div>
-      <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 pl-2 mb-4 flex-grow">
-        {criteria.map((item, index) => <li key={index}>{item}</li>)}
-      </ul>
-      <Button 
-        onClick={onClick} 
-        fullWidth 
-        variant={variant}
-        rightIcon={<ChevronRight />}
-        aria-label={buttonLabel}
-        className="mt-auto"
-        size="lg"
-      >
-        {buttonLabel}
-      </Button>
-    </div>
-  );
+    );
+  };
 
   return (
     <Card title="Assess Episode Severity (Young Child ≤5 years)" icon={<ShieldAlert className="text-red-600" />}>

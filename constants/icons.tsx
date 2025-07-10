@@ -1,3 +1,4 @@
+
 export {
   Users,
   ChevronRight,
@@ -38,5 +39,14 @@ export {
   Edit3,
   Link,
   Sparkles,
-  Send
+  Send,
+  Droplets,
+  MessageCircle,
+  FlaskConical,
+  TestTubeDiagonal,
+  Beaker,
+  Biohazard,
+  Check,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';

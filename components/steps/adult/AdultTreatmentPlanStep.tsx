@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import { useNavigation } from '../../../contexts/NavigationContext';
@@ -6,6 +7,7 @@ import Button from '../../ui/Button';
 import { adultTreatments } from '../../../constants/treatmentData';
 import { TreatmentDetail, ControlLevel } from '../../../types';
 import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Zap, Wind, ShieldCheck, Route, FileText, Info, CheckCircle2, XCircle, ListChecks } from 'lucide-react';
+import DetailSection from '../../common/DetailSection';
 
 const AdultTreatmentPlanStep: React.FC = () => {
   const { patientData, updatePatientData } = usePatientData();
@@ -43,16 +45,6 @@ const AdultTreatmentPlanStep: React.FC = () => {
     }
   };
   
-  const DetailSection: React.FC<{ title: string; children: React.ReactNode; icon?: React.ReactElement; className?: string }> = ({ title, children, icon, className }) => (
-    <div className={`py-3 ${className}`}>
-      <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2 flex items-center">
-        {icon && React.cloneElement(icon as React.ReactElement<{ size?: number; className?: string }>, { size: 16, className: `mr-2 ${(icon.props as any)?.className || ''}` })}
-        {title}
-      </h4>
-      <div className="text-slate-700 leading-relaxed text-sm">{children}</div>
-    </div>
-  );
-
   const ControlResultDisplay: React.FC<{ level: ControlLevel | null }> = ({ level }) => {
     if (!level) return null;
 

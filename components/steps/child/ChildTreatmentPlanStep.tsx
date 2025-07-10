@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import { useNavigation } from '../../../contexts/NavigationContext';
@@ -6,6 +8,7 @@ import Button from '../../ui/Button';
 import { childTreatments } from '../../../constants/treatmentData';
 import { TreatmentDetail, ChildGINASteps, ChildPathway, ControlLevel } from '../../../types';
 import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Activity, Zap, ShieldCheck, BookOpen, CheckCircle2, XCircle, ListChecks, Info } from 'lucide-react';
+import DetailSection from '../../common/DetailSection';
 
 const ChildTreatmentPlanStep: React.FC = () => {
   const { patientData, updatePatientData } = usePatientData();
@@ -44,13 +47,6 @@ const ChildTreatmentPlanStep: React.FC = () => {
     }
   };
   
-  const DetailSection: React.FC<{ title: string; children: React.ReactNode; className?: string }> = ({ title, children, className }) => (
-    <div className={className}>
-      <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">{title}</h4>
-      <div className="text-slate-700 text-sm leading-relaxed">{children}</div>
-    </div>
-  );
-
   const ControlResultDisplay: React.FC<{ level: ControlLevel | null }> = ({ level }) => {
     if (!level) return null;
 
@@ -95,28 +91,28 @@ const ChildTreatmentPlanStep: React.FC = () => {
           {treatment ? (
             <>
               {treatment.controller && (
-                <DetailSection title="Controller Treatment">
+                <DetailSection title="Controller Treatment" icon={<ShieldCheck className="text-emerald-500"/>}>
                   <p>{treatment.controller}</p>
                 </DetailSection>
               )}
               {treatment.reliever && (
-                <DetailSection title="Reliever Treatment">
+                <DetailSection title="Reliever Treatment" icon={<Zap className="text-blue-500"/>}>
                   <p>{treatment.reliever}</p>
                 </DetailSection>
               )}
               {treatment.keyPoints && treatment.keyPoints.length > 0 && (
-                <DetailSection title="Key Points">
-                  <ul className="list-disc list-inside pl-1 space-y-1 text-sm">
+                <DetailSection title="Key Points" icon={<Info className="text-sky-500"/>}>
+                  <ul className="list-disc list-inside space-y-1 text-sm">
                     {treatment.keyPoints.map((point, index) => <li key={index}>{point}</li>)}
                   </ul>
                 </DetailSection>
               )}
               {treatment.additional && (
-                <DetailSection title="Additional Considerations / Options">
+                <DetailSection title="Additional Considerations / Options" icon={<PlusCircle className="text-cyan-500"/>}>
                   {typeof treatment.additional === 'string' ? (
                     <p className="text-sm">{treatment.additional}</p>
                   ) : (
-                    <ul className="list-disc list-inside pl-1 space-y-1 text-sm">
+                    <ul className="list-disc list-inside space-y-1 text-sm">
                       {treatment.additional.map((item, index) => <li key={index}>{item}</li>)}
                     </ul>
                   )}
@@ -136,8 +132,8 @@ const ChildTreatmentPlanStep: React.FC = () => {
               )}
               {treatment.referral && (
                 <div className="mt-4 p-3 bg-amber-50 border-l-4 border-amber-400 rounded-md">
-                  <p className="font-semibold text-amber-700 text-sm">Specialist Referral Recommended:</p>
-                  <p className="text-sm text-amber-600 leading-relaxed">{treatment.referral}</p>
+                   <h4 className="font-semibold text-amber-700 text-sm flex items-center"><AlertTriangle size={16} className="mr-2"/>Specialist Referral Recommended</h4>
+                  <p className="text-sm text-amber-600 leading-relaxed pl-6">{treatment.referral}</p>
                 </div>
               )}
             </>

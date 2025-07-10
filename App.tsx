@@ -2,7 +2,7 @@
 import React from 'react';
 import { PatientDataProvider } from './contexts/PatientDataContext';
 import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
-import { UIStateProvider, useUIState } from './contexts/UIStateContext';
+import { UIStateProvider } from './contexts/UIStateContext';
 import { MainLayout } from './components/layout/MainLayout';
 
 import { InitialStep } from './components/steps/InitialStep'; 
@@ -10,6 +10,11 @@ import DiagnosisPendingStep from './components/steps/common/DiagnosisPendingStep
 import AbbreviationsStep from './components/steps/common/AbbreviationsStep'; 
 import AIAssistantPanel from './components/ai/AIAssistantPanel';
 import GoalsModal from './components/common/GoalsModal';
+import InfoModal from './components/common/InfoModal';
+import InitialDiagnosisFlowchartStep from './components/steps/common/InitialDiagnosisFlowchartStep';
+import StepDownAssessStep from './components/steps/common/step_down/StepDownAssessStep';
+import StepDownAdjustStep from './components/steps/common/step_down/StepDownAdjustStep';
+import StepDownReviewStep from './components/steps/common/step_down/StepDownReviewStep';
 
 
 // Adult Steps
@@ -43,6 +48,15 @@ import YoungChildExacerbationIntroStep from './components/steps/youngChild/Young
 import YoungChildExacerbationSeverityStep from './components/steps/youngChild/YoungChildExacerbationSeverityStep';
 import YoungChildExacerbationPlanStep from './components/steps/youngChild/YoungChildExacerbationPlanStep';
 
+// Severe Asthma Steps
+import DecisionTreeStep1 from './components/steps/severe_asthma/DecisionTreeStep1';
+import DecisionTreeStep2 from './components/steps/severe_asthma/DecisionTreeStep2';
+import DecisionTreeStep3 from './components/steps/severe_asthma/DecisionTreeStep3';
+import DecisionTreeStep4 from './components/steps/severe_asthma/DecisionTreeStep4';
+import PhenotypeStep from './components/steps/severe_asthma/PhenotypeStep';
+import BiologicSelectionStep from './components/steps/severe_asthma/BiologicSelectionStep';
+
+
 const StepRenderer: React.FC = () => {
   const { currentStepId } = useNavigation();
 
@@ -53,6 +67,14 @@ const StepRenderer: React.FC = () => {
       return <DiagnosisPendingStep />;
     case 'ABBREVIATIONS_STEP':
       return <AbbreviationsStep />;
+    case 'INITIAL_DIAGNOSIS_FLOWCHART_STEP':
+      return <InitialDiagnosisFlowchartStep />;
+    case 'STEP_DOWN_ASSESS_STEP':
+        return <StepDownAssessStep />;
+    case 'STEP_DOWN_ADJUST_STEP':
+        return <StepDownAdjustStep />;
+    case 'STEP_DOWN_REVIEW_STEP':
+        return <StepDownReviewStep />;
 
     // Adult Pathway
     case 'ADULT_DIAGNOSIS_STEP':
@@ -109,6 +131,21 @@ const StepRenderer: React.FC = () => {
       return <YoungChildExacerbationSeverityStep />;
     case 'YOUNG_CHILD_EXACERBATION_PLAN_STEP':
       return <YoungChildExacerbationPlanStep />;
+      
+    // Severe Asthma Pathway
+    case 'SEVERE_ASTHMA_DECISION_TREE_STEP_1':
+      return <DecisionTreeStep1 />;
+    case 'SEVERE_ASTHMA_DECISION_TREE_STEP_2':
+      return <DecisionTreeStep2 />; // New 'Investigate' step
+    case 'SEVERE_ASTHMA_PHENOTYPE_STEP':
+      return <PhenotypeStep />; // Repurposed 'Assess Biomarkers' step (now Step 3)
+    case 'SEVERE_ASTHMA_DECISION_TREE_STEP_3':
+      return <DecisionTreeStep3 />; // Old step 3 becomes step 4
+    case 'SEVERE_ASTHMA_DECISION_TREE_STEP_4':
+      return <DecisionTreeStep4 />; // Old step 4 becomes step 5
+    case 'SEVERE_ASTHMA_BIOLOGIC_SELECTION_STEP':
+      return <BiologicSelectionStep />;
+
 
     default:
       return <InitialStep />;
@@ -118,15 +155,16 @@ const StepRenderer: React.FC = () => {
 const App: React.FC = () => {
   return (
     <PatientDataProvider>
-      <NavigationProvider>
-        <UIStateProvider>
+      <UIStateProvider>
+        <NavigationProvider>
           <MainLayout>
             <StepRenderer />
           </MainLayout>
           <AIAssistantPanel />
           <GoalsModal />
-        </UIStateProvider>
-      </NavigationProvider>
+          <InfoModal />
+        </NavigationProvider>
+      </UIStateProvider>
     </PatientDataProvider>
   );
 };

@@ -13,15 +13,28 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, icon, children, className = '', titleClassName = '', actions, footer, titleRightElement }) => {
-  const clonedIcon = icon ? React.cloneElement(icon as React.ReactElement<{ size?: number; className?: string }>, { size: 24, className: `mr-2.5 text-slate-700 ${(icon.props as any)?.className || ''}` }) : null;
+  let clonedIcon = null;
+  if (icon) {
+      const iconProps: { size: number; className: string; } = {
+          size: 24,
+          className: 'mr-2.5 text-slate-700',
+      };
+      if ((icon.props as any).className) {
+        iconProps.className += ' ' + (icon.props as any).className;
+      }
+      clonedIcon = React.cloneElement(icon as React.ReactElement<any>, iconProps);
+  }
   
+  const finalClassName = ['bg-white', 'rounded-lg', 'shadow-lg', className].filter(Boolean).join(' ');
+  const finalTitleClassName = ['text-lg', 'font-semibold', 'text-slate-800', titleClassName].filter(Boolean).join(' ');
+
   return (
-    <div className={`bg-white rounded-lg shadow-lg ${className}`}>
+    <div className={finalClassName}>
       {title && (
         <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-200">
           <div className="flex items-center">
             {clonedIcon}
-            <h2 className={`text-lg font-semibold text-slate-800 ${titleClassName}`}>{title}</h2>
+            <h2 className={finalTitleClassName}>{title}</h2>
           </div>
           {titleRightElement && <div>{titleRightElement}</div>}
         </div>

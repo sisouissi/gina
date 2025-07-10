@@ -1,3 +1,4 @@
+
 export type AgeGroup = 'adult' | 'child' | 'youngChild';
 
 // Control Levels
@@ -91,6 +92,10 @@ export type StepId =
   // Common
   | 'DIAGNOSIS_PENDING_STEP'
   | 'ABBREVIATIONS_STEP' 
+  | 'INITIAL_DIAGNOSIS_FLOWCHART_STEP'
+  | 'STEP_DOWN_ASSESS_STEP'
+  | 'STEP_DOWN_ADJUST_STEP'
+  | 'STEP_DOWN_REVIEW_STEP'
   // Adult
   | 'ADULT_DIAGNOSIS_STEP'
   | 'ADULT_SYMPTOM_FREQUENCY_STEP'
@@ -118,7 +123,14 @@ export type StepId =
   | 'YOUNG_CHILD_CONTROL_ASSESSMENT_STEP'
   | 'YOUNG_CHILD_EXACERBATION_INTRO_STEP'
   | 'YOUNG_CHILD_EXACERBATION_SEVERITY_STEP'
-  | 'YOUNG_CHILD_EXACERBATION_PLAN_STEP';
+  | 'YOUNG_CHILD_EXACERBATION_PLAN_STEP'
+  // Severe Asthma
+  | 'SEVERE_ASTHMA_DECISION_TREE_STEP_1' // Confirm & Optimize
+  | 'SEVERE_ASTHMA_DECISION_TREE_STEP_2' // Investigate & Support
+  | 'SEVERE_ASTHMA_PHENOTYPE_STEP'         // Assess Biomarkers (now Step 3)
+  | 'SEVERE_ASTHMA_DECISION_TREE_STEP_3' // Choose Biologic (now Step 4)
+  | 'SEVERE_ASTHMA_DECISION_TREE_STEP_4' // Assess Response (now Step 5)
+  | 'SEVERE_ASTHMA_BIOLOGIC_SELECTION_STEP';
 
 
 // Treatment data structures

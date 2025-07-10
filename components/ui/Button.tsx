@@ -69,13 +69,35 @@ const Button: React.FC<ButtonProps> = ({
 
   const widthStyles = fullWidth ? 'w-full' : '';
 
-  const clonedLeftIcon = leftIcon ? React.cloneElement(leftIcon as React.ReactElement<{ size?: number; className?: string }>, { size: iconSize, className: `mr-2 ${(leftIcon.props as any)?.className || ''}` }) : null;
-  const clonedRightIcon = rightIcon ? React.cloneElement(rightIcon as React.ReactElement<{ size?: number; className?: string }>, { size: iconSize, className: `ml-2 ${(rightIcon.props as any)?.className || ''}` }) : null;
+  let clonedLeftIcon = null;
+  if (leftIcon) {
+      const iconProps: { size: number; className: string; } = {
+          size: iconSize,
+          className: 'mr-2',
+      };
+      if ((leftIcon.props as any).className) {
+        iconProps.className += ' ' + (leftIcon.props as any).className;
+      }
+      clonedLeftIcon = React.cloneElement(leftIcon as React.ReactElement<any>, iconProps);
+  }
 
+  let clonedRightIcon = null;
+  if (rightIcon) {
+      const iconProps: { size: number; className: string; } = {
+          size: iconSize,
+          className: 'ml-2',
+      };
+      if ((rightIcon.props as any).className) {
+        iconProps.className += ' ' + (rightIcon.props as any).className;
+      }
+      clonedRightIcon = React.cloneElement(rightIcon as React.ReactElement<any>, iconProps);
+  }
+
+  const finalClassName = [baseStyles, variantStyles, sizeStyles, widthStyles, className].filter(Boolean).join(' ');
 
   return (
     <button
-      className={`${baseStyles} ${variantStyles} ${sizeStyles} ${widthStyles} ${className}`}
+      className={finalClassName}
       {...props}
     >
       {clonedLeftIcon}

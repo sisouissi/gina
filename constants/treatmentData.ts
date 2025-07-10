@@ -1,3 +1,4 @@
+
 import { AdultTreatmentOptions, ChildTreatmentOptions, YoungChildTreatmentOptions, TreatmentDetail } from '../types';
 
 export const adultTreatments: AdultTreatmentOptions = {
@@ -204,80 +205,87 @@ export const youngChildTreatments: YoungChildTreatmentOptions = {
 export const exacerbationPlanDetails = {
   adult: {
     mildModerateAtHome: {
-      title: "Mild to Moderate Exacerbation (Adults)",
+      title: "Management of Mild-Moderate Exacerbation (Adults)",
       steps: [
-        "Reliever: Take 2-4 puffs SABA every 20 mins for 1 hour. If on Pathway 1, use 1-2 puffs ICS-formoterol, repeat after 20 mins.",
-        "Assess response. If good, continue reliever as needed. If poor, continue reliever and contact doctor.",
-        "Systemic Corticosteroids: Start a short course of oral corticosteroids (OCS) if prescribed for this situation (e.g., Prednisone 40-50mg/day for 5-7 days)."
+        "Reliever: Increase frequency. For SABA, take 2-4 puffs every 20 minutes for 1 hour. For ICS-formoterol AIR/MART, take 1 extra puff as needed (up to a max total of 12 puffs/day).",
+        "Systemic Corticosteroids: Start promptly. Typical dose: Prednisone 40-50mg daily for 5-7 days. Tapering is not generally needed for courses of this duration.",
+        "Assess Response: If symptoms improve and relief lasts for at least 3-4 hours, continue increased reliever use and review controller medication.",
+        "Controller: Review and consider stepping up long-term controller therapy. An exacerbation signals a failure of current management."
       ],
       whenToSeekUrgentHelp: [
-        "Symptoms worsen rapidly or do not respond to initial reliever therapy.",
+        "Symptoms worsen rapidly despite increased reliever use.",
         "Difficulty speaking in full sentences or breathlessness at rest.",
         "Drowsiness, confusion, or cyanosis (blue lips/nails).",
         "PEF <60% of personal best or predicted."
-      ]
+      ],
+      notes: "Self-management should follow the patient's written asthma action plan. Refer to GINA 2025, Box 9-2 for detailed guidance."
     },
     severeInER: {
-      title: "Severe Exacerbation - Emergency Care (Adults)",
+      title: "Management of Severe Exacerbation - Emergency Care (Adults)",
       keyTreatments: [
-        "Oxygen to maintain SaO2 93-95%.",
-        "Repeated inhaled SABA (up to 10 puffs via spacer) + Ipratropium Bromide.",
-        "Systemic Corticosteroids: Oral Prednisone (e.g., 1mg/kg, max 50mg) or IV hydrocortisone.",
-        "Consider IV magnesium sulfate for severe cases not responding to initial bronchodilators."
+        "Oxygen: Titrate to maintain SaO2 93-95%.",
+        "Bronchodilators: High-dose inhaled SABA plus ipratropium bromide, given repeatedly for the first hour via pMDI with spacer or nebulizer.",
+        "Systemic Corticosteroids: Administer within 1 hour. Oral prednisone (1mg/kg, max 50mg) is effective. Use IV hydrocortisone if patient cannot take oral medication.",
+        "Consider IV magnesium sulfate (2g IV over 20 mins) for patients with FEV1 <25-30% predicted or those with poor response to initial therapy."
       ],
-      monitoring: ["FEV1 or PEF, SaO2, clinical signs (respiratory rate, accessory muscle use, ability to speak)."]
+      monitoring: ["Frequent assessment of clinical signs (respiratory rate, accessory muscle use, speech), SaO2, and lung function (PEF or FEV1) to gauge response."],
+      notes: "Admission criteria include poor/transient response to treatment, persistent low lung function (PEF <60%), drowsiness, or confusion. See GINA 2025, Box 9-4."
     }
   },
   child: { // 6-11 years
      mildModerateAtHome: {
-      title: "Mild to Moderate Exacerbation (Child 6-11y)",
+      title: "Management of Mild-Moderate Exacerbation (Child 6-11y)",
       steps: [
         "Reliever: Give 2-4 puffs of SABA (pMDI + spacer) every 20 minutes for up to 1 hour.",
-        "Action Plan: Follow the child's written asthma action plan. This may include increasing controller dose.",
-        "Oral Corticosteroids: Contact doctor. May need a short course (Prednisone 1-2 mg/kg, max 40mg, for 3-5 days)."
+        "Oral Corticosteroids: Contact doctor promptly. A short course of oral prednisolone (1-2 mg/kg, max 40mg, for 3-5 days) is usually needed.",
+        "Controller: Review controller medication. A temporary increase may be advised as part of the action plan.",
+        "Assess Response: If symptoms are not relieved, or reliever is needed more often than every 3-4 hours, seek urgent medical care."
       ],
       whenToSeekUrgentHelp: [
         "Reliever needed more often than every 3-4 hours.",
         "Child is too breathless to talk, eat, or play.",
         "Ribs pulling in with each breath (retractions).",
         "Child is very drowsy, confused or agitated."
-      ]
+      ],
+      notes: "All reliever medication should be administered via pMDI with a valved holding chamber (spacer). See GINA 2025, Box 9-3."
     },
     severeInER: {
-      title: "Severe Exacerbation - Emergency Care (Child 6-11y)",
+      title: "Management of Severe Exacerbation - Emergency Care (Child 6-11y)",
        keyTreatments: [
-        "Oxygen to maintain SaO2 >94%.",
-        "Inhaled SABA (4-10 puffs via spacer) + Ipratropium Bromide, repeated as needed.",
-        "Oral Corticosteroids (Prednisone 1-2 mg/kg, max 40mg).",
-        "Consider IV magnesium for severe cases with poor initial response."
+        "Oxygen: Titrate to maintain SaO2 >94%.",
+        "Bronchodilators: Inhaled SABA (4-10 puffs via spacer) + Ipratropium Bromide (2-4 puffs), which can be repeated every 20 minutes for the first hour.",
+        "Systemic Corticosteroids: Administer oral prednisolone promptly (1-2 mg/kg, max 40mg). IV is generally not superior if child can take oral.",
+        "Consider IV magnesium for severe cases with poor initial response. IV SABA is for ICU setting only."
       ],
-       monitoring: ["Oxygen saturation, respiratory rate, heart rate, use of accessory muscles."]
+       monitoring: ["Continuous monitoring of oxygen saturation, respiratory rate, heart rate, and work of breathing (retractions)."],
+       notes: "Hospital admission is required if there is poor or transient response to initial treatment. See GINA 2025, Box 9-4."
     }
   },
   youngChild: { // <= 5 years
     mildModerateAtHome: {
-      title: "Mild-Moderate Wheezing Episode (Child ≤5y)",
+      title: "Management of Mild-Moderate Wheezing Episode (Child ≤5y)",
       steps: [
-        "Reliever: Give 2 puffs of SABA (pMDI + spacer + facemask) every 20 minutes for up to 3 doses (total 6 puffs in 1 hour).",
-        "Assess Response: If symptoms improve, continue SABA 2 puffs every 4-6 hours as needed for 1-2 days.",
-        "Contact Doctor: Inform doctor of the episode. OCS are generally not initiated by parents at home."
+        "Reliever: Give 2 puffs of SABA (pMDI + spacer + facemask). Can be repeated every 20 minutes for up to 3 doses (total 6 puffs in 1 hour).",
+        "Assess Response: If symptoms improve and relief lasts >3 hours, continue SABA 2 puffs every 4-6 hours as needed for 1-2 days. If response is poor, seek urgent care.",
+        "Contact Doctor: Parents should inform their doctor of the episode. OCS are not usually initiated by parents at home but may be prescribed after assessment."
       ],
        whenToSeekUrgentHelp: [
         "Symptoms worsen or do not improve after 1 hour of initial SABA treatment.",
         "Child is too breathless to feed, talk or cry.",
         "Shows signs of severe respiratory distress (retractions, nasal flaring, grunting).",
         "Child becomes drowsy, confused, or has blue lips."
-      ]
+      ],
+      notes: "The key is early recognition and intervention based on the child's written action plan. See GINA 2025, Box 11-4."
     },
     severeInER: {
-      title: "Severe Wheezing Episode - Emergency Care (Child ≤5y)",
+      title: "Management of Severe Wheezing Episode - Emergency Care (Child ≤5y)",
        keyTreatments: [
-        "Oxygen to maintain SaO2 >94%.",
-        "Inhaled SABA (4-6 puffs via spacer) repeated every 20 minutes.",
-        "Ipratropium bromide with SABA for moderate/severe episodes.",
-        "Oral Corticosteroids: Prednisone 1-2 mg/kg (max 20mg for 0-2y; 30mg for 3-5y) for up to 5 days."
+        "Oxygen: Administer to maintain SaO2 >94%.",
+        "Bronchodilators: Inhaled SABA (4-6 puffs via spacer) repeated every 20 minutes, with ipratropium bromide for moderate/severe episodes.",
+        "Systemic Corticosteroids: Prednisolone 1-2 mg/kg (max 20mg for 0-2y; 30mg for 3-5y) for 3-5 days is recommended for most episodes treated in emergency care."
       ],
-      monitoring: ["Oxygen saturation, respiratory rate, heart rate, work of breathing."]
+      monitoring: ["Continuous assessment of oxygen saturation, heart rate, respiratory rate, and work of breathing."],
+      notes: "Severe exacerbations in this age group require prompt emergency department evaluation. See GINA 2025, Box 11-5."
     }
   }
 };

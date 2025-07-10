@@ -2,6 +2,7 @@
 import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
 import { StepId, PatientData } from '../types'; 
 import { usePatientData } from './PatientDataContext';
+import { useUIState } from './UIStateContext';
 
 
 interface NavigationContextType {
@@ -18,15 +19,18 @@ export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children
   const [currentStepId, setCurrentStepId] = useState<StepId>('INITIAL_STEP');
   const [history, setHistory] = useState<StepId[]>(['INITIAL_STEP']);
   const { updatePatientData: updatePatientDataContext, resetPatientData } = usePatientData();
+  const { closeSidePanel } = useUIState();
 
 
   const navigateTo = useCallback((stepId: StepId, updates?: Partial<PatientData>) => {
     if (updates) {
       updatePatientDataContext(updates);
     }
+    // Close any open side panels when navigating to a new step
+    closeSidePanel();
     setCurrentStepId(stepId);
     setHistory(prevHistory => [...prevHistory, stepId]);
-  }, [updatePatientDataContext]);
+  }, [updatePatientDataContext, closeSidePanel]);
 
   const goBack = useCallback(() => {
     if (history.length > 1) {
@@ -41,9 +45,10 @@ export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children
 
   const resetNavigation = useCallback(() => {
     resetPatientData(); 
+    closeSidePanel();
     setCurrentStepId('INITIAL_STEP');
     setHistory(['INITIAL_STEP']);
-  }, [resetPatientData]);
+  }, [resetPatientData, closeSidePanel]);
 
   return (
     <NavigationContext.Provider value={{ currentStepId, history, navigateTo, goBack, resetNavigation }}>

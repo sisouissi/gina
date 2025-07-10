@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useUIState } from '../../contexts/UIStateContext';
 import { useAIAssistant } from '../../hooks/useAIAssistant';
 import Button from '../ui/Button';
-import { Sparkles, Send, XCircle, Bot } from 'lucide-react';
+import { Sparkles, Send, XCircle, MessageCircle } from 'lucide-react';
 import MarkdownRenderer from '../ui/MarkdownRenderer';
 
 const AIAssistantPanel: React.FC = () => {
@@ -39,10 +39,13 @@ const AIAssistantPanel: React.FC = () => {
         >
             <header className="flex items-center justify-between p-4 bg-slate-900 text-white rounded-t-lg border-b border-slate-700">
                 <div className="flex items-center">
-                    <Sparkles className="text-violet-400 mr-3" />
-                    <h2 className="text-lg font-semibold">GINA 2025 AI Assistant</h2>
+                    <MessageCircle size={24} className="text-violet-400 mr-3" />
+                    <div>
+                        <h2 className="text-lg font-semibold">Ask the Expert</h2>
+                        <p className="text-xs text-slate-400">Your guide to the GINA 2025 document</p>
+                    </div>
                 </div>
-                <Button variant="ghost" onClick={closeAIPanel} size="sm" className="!p-2 text-white hover:bg-slate-700">
+                <Button variant="ghost" onClick={closeAIPanel} size="sm" className="!p-2 text-white hover:bg-slate-700" aria-label="Close panel">
                     <XCircle size={20} />
                 </Button>
             </header>
@@ -50,15 +53,15 @@ const AIAssistantPanel: React.FC = () => {
             <div className="flex-grow p-4 overflow-y-auto space-y-4">
                 {messages.map((msg, index) => (
                     <div key={index} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
-                        {msg.role === 'model' && <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0"><Bot size={20} className="text-white"/></div>}
-                        <div className={`p-3 rounded-lg max-w-lg ${msg.role === 'user' ? 'bg-sky-600 text-white' : 'bg-white text-slate-700 border border-slate-200 shadow-sm'}`}>
+                        {msg.role === 'model' && <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0"><MessageCircle size={20} className="text-white"/></div>}
+                        <div className={`p-3 rounded-2xl max-w-lg shadow-md ${msg.role === 'user' ? 'bg-sky-600 text-white' : 'bg-white text-slate-700 border border-slate-200'}`}>
                             <MarkdownRenderer content={msg.parts[0].text} />
                         </div>
                     </div>
                 ))}
                 {isLoading && messages[messages.length - 1]?.role === 'model' && (
                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0"><Bot size={20} className="text-white"/></div>
+                        <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0"><MessageCircle size={20} className="text-white"/></div>
                         <div className="p-3 rounded-lg bg-white text-slate-700 border border-slate-200">
                             <div className="flex items-center space-x-1">
                                <div className="w-2 h-2 bg-slate-400 rounded-full animate-pulse [animation-delay:-0.3s]"></div>

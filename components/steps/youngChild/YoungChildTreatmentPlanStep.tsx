@@ -1,3 +1,6 @@
+
+
+
 import React from 'react';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import { useNavigation } from '../../../contexts/NavigationContext';
@@ -5,7 +8,8 @@ import Card from '../../ui/Card';
 import Button from '../../ui/Button';
 import { youngChildTreatments } from '../../../constants/treatmentData';
 import { TreatmentDetail, YoungChildGinaSteps, YoungChildTreatmentStrategyKey, YoungChildStepTreatment, YoungChildAlternativeTreatment, ControlLevel } from '../../../types';
-import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Baby, Zap, HelpCircle, CheckCircle2, XCircle, ListChecks } from 'lucide-react';
+import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Baby, Zap, HelpCircle, CheckCircle2, XCircle, ListChecks, Info, ShieldCheck } from 'lucide-react';
+import DetailSection from '../../common/DetailSection';
 
 const YoungChildTreatmentPlanStep: React.FC = () => {
   const { patientData, updatePatientData } = usePatientData();
@@ -57,13 +61,6 @@ const YoungChildTreatmentPlanStep: React.FC = () => {
     updatePatientData({ youngChild_currentTreatmentStrategy: strategyId });
   };
 
-  const DetailSection: React.FC<{ title: string; children: React.ReactNode; className?: string }> = ({ title, children, className }) => (
-    <div className={`py-2 ${className}`}>
-      <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">{title}</h4>
-      <div className="text-slate-700 text-sm leading-relaxed">{children}</div>
-    </div>
-  );
-  
   const ControlResultDisplay: React.FC<{ level: ControlLevel | null }> = ({ level }) => {
     if (!level) return null;
 
@@ -108,26 +105,26 @@ const YoungChildTreatmentPlanStep: React.FC = () => {
       {activeTreatment ? (
         <div className="space-y-3 bg-white p-4 rounded-md border border-slate-200">
           {activeTreatment.controller && (
-            <DetailSection title="Controller Treatment">
+            <DetailSection title="Controller Treatment" icon={<ShieldCheck className="text-emerald-500"/>}>
               <p>{activeTreatment.controller}</p>
             </DetailSection>
           )}
           {activeTreatment.reliever && (
-            <DetailSection title="Reliever Treatment">
+            <DetailSection title="Reliever Treatment" icon={<Zap className="text-blue-500"/>}>
               <p>{activeTreatment.reliever}</p>
             </DetailSection>
           )}
           {activeTreatment.keyPoints && activeTreatment.keyPoints.length > 0 && (
-             <DetailSection title="Key Points">
-              <ul className="list-disc list-inside pl-1 space-y-0.5">
+             <DetailSection title="Key Points" icon={<Info className="text-sky-500"/>}>
+              <ul className="list-disc list-inside space-y-0.5">
                 {activeTreatment.keyPoints.map((point, i) => <li key={i}>{point}</li>)}
               </ul>
             </DetailSection>
           )}
           {activeTreatment.additional && (
-            <DetailSection title="Additional Considerations">
+            <DetailSection title="Additional Considerations" icon={<PlusCircle className="text-cyan-500"/>}>
               {typeof activeTreatment.additional === 'string' ? <p>{activeTreatment.additional}</p> : 
-                <ul className="list-disc list-inside pl-1 space-y-0.5">{activeTreatment.additional.map((item, i) => <li key={i}>{item}</li>)}</ul>}
+                <ul className="list-disc list-inside space-y-0.5">{activeTreatment.additional.map((item, i) => <li key={i}>{item}</li>)}</ul>}
             </DetailSection>
           )}
           {activeTreatment.notes && (
@@ -139,8 +136,8 @@ const YoungChildTreatmentPlanStep: React.FC = () => {
           )}
           {activeTreatment.referral && (
             <div className="mt-3 p-2.5 bg-amber-50 border-l-4 border-amber-400 rounded-r-md">
-              <p className="font-semibold text-amber-700 text-sm">Specialist Referral:</p>
-              <p className="text-sm text-amber-600">{activeTreatment.referral}</p>
+              <h4 className="font-semibold text-amber-700 text-sm flex items-center"><AlertTriangle size={16} className="mr-2"/>Specialist Referral</h4>
+              <p className="text-sm text-amber-600 pl-6">{activeTreatment.referral}</p>
             </div>
           )}
         </div>

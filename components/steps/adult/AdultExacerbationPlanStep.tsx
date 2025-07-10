@@ -1,10 +1,13 @@
+
+
 import React from 'react';
 import Card from '../../ui/Card';
 import Button from '../../ui/Button';
 import { useNavigation } from '../../../contexts/NavigationContext';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import { exacerbationPlanDetails } from '../../../constants/treatmentData';
-import { AlertTriangle, CheckCircle, ChevronRight, FileText, RotateCcw, Activity, ShieldAlert, Monitor, HeartPulse } from 'lucide-react';
+import { AlertTriangle, ChevronRight, FileText, RotateCcw, Activity, ShieldAlert, Monitor, HeartPulse, Info, ClipboardList } from 'lucide-react';
+import DetailSection from '../../common/DetailSection';
 
 const AdultExacerbationPlanStep: React.FC = () => {
   const { navigateTo, resetNavigation } = useNavigation();
@@ -33,12 +36,6 @@ const AdultExacerbationPlanStep: React.FC = () => {
   const cardBorderClass = isMildModerate ? "border-amber-400" : "border-red-400";
   const cardBgClass = isMildModerate ? "bg-amber-50" : "bg-red-50";
   
-  const DetailSection: React.FC<{ title: string; children: React.ReactNode; className?: string }> = ({ title, children, className }) => (
-    <div className={`mb-4 ${className}`}>
-      <h4 className="text-md font-semibold text-slate-700 mb-2">{title}</h4>
-      <div className="text-sm text-slate-600 leading-relaxed">{children}</div>
-    </div>
-  );
 
   return (
     <Card 
@@ -47,24 +44,27 @@ const AdultExacerbationPlanStep: React.FC = () => {
         className={`${cardBgClass} ${cardBorderClass}`}
     >
       {('steps' in plan) && plan.steps && (
-        <DetailSection title="Key Management Steps:">
-          <ul className="list-decimal list-inside space-y-2 pl-2">
+        <DetailSection title="Key Management Steps" icon={<ClipboardList className="text-slate-600"/>}>
+          <ul className="list-decimal list-inside space-y-2">
             {plan.steps.map((step, index) => <li key={index}>{step}</li>)}
           </ul>
         </DetailSection>
       )}
 
       {('keyTreatments' in plan) && plan.keyTreatments && (
-         <DetailSection title="Key Emergency Treatments:">
-          <ul className="list-disc list-inside space-y-1 pl-2">
+         <DetailSection title="Key Emergency Treatments" icon={<HeartPulse className="text-slate-600"/>}>
+          <ul className="list-disc list-inside space-y-1">
             {plan.keyTreatments.map((treatment, index) => <li key={index}>{treatment}</li>)}
           </ul>
         </DetailSection>
       )}
       
       {('whenToSeekUrgentHelp' in plan) && plan.whenToSeekUrgentHelp && (
-        <div className={`mt-4 p-3 rounded-md border-l-4 ${isMildModerate ? 'bg-red-100 border-red-500' : 'bg-red-100 border-red-600'}`}>
-          <h4 className={`font-semibold mb-1 ${isMildModerate ? 'text-red-700' : 'text-red-800'}`}>When to Seek Urgent Medical Attention:</h4>
+        <div className={`mt-4 p-4 rounded-md border-l-4 ${isMildModerate ? 'bg-red-100 border-red-500' : 'bg-red-100 border-red-600'}`}>
+          <h4 className={`font-semibold mb-2 flex items-center ${isMildModerate ? 'text-red-700' : 'text-red-800'}`}>
+            <AlertTriangle size={18} className="mr-2"/>
+            When to Seek Urgent Medical Attention
+          </h4>
           <ul className={`list-disc list-inside space-y-1 pl-4 text-sm ${isMildModerate ? 'text-red-600' : 'text-red-700'}`}>
             {plan.whenToSeekUrgentHelp.map((item, index) => <li key={index}>{item}</li>)}
           </ul>
@@ -72,17 +72,39 @@ const AdultExacerbationPlanStep: React.FC = () => {
       )}
 
       {('monitoring' in plan) && plan.monitoring && (
-         <DetailSection title="Monitoring:" className="mt-4">
-          <ul className="list-disc list-inside space-y-1 pl-2">
+         <DetailSection title="Monitoring" icon={<Monitor className="text-slate-600"/>} className="mt-4">
+          <ul className="list-disc list-inside space-y-1">
             {plan.monitoring.map((item, index) => <li key={index}>{item}</li>)}
           </ul>
         </DetailSection>
       )}
 
-      <div className="mt-8 pt-6 border-t border-slate-200 space-y-3">
-        <p className="text-xs text-slate-500 text-center">
-            Ensure the patient has an up-to-date written asthma action plan. Review exacerbation triggers and prevention strategies after episode resolution.
-        </p>
+      {('notes' in plan) && plan.notes && (
+        <div className="mt-4 p-3 bg-sky-100 border-l-4 border-sky-400 text-sky-800 text-sm rounded-r-md">
+            <h4 className="font-semibold mb-1 flex items-center"><Info size={16} className="mr-2"/>Reference</h4>
+            <p className="pl-6">{plan.notes}</p>
+        </div>
+      )}
+
+      <div className="mt-8 pt-6 border-t border-slate-300">
+        <div className="p-4 bg-slate-100 rounded-lg border border-slate-200">
+            <h3 className="font-semibold text-slate-800 mb-3 flex items-center">
+                <ClipboardList size={20} className="mr-2.5 text-slate-600" />
+                Post-Exacerbation Follow-up
+            </h3>
+            <p className="text-sm text-slate-600 mb-3">
+                An asthma exacerbation is a failure of chronic management and signals an increased risk of future attacks. An urgent follow-up review is essential.
+            </p>
+            <p className="text-sm font-semibold text-slate-700">The goals of this review are to:</p>
+            <ul className="list-disc list-inside space-y-1 text-sm text-slate-600 mt-2 pl-4">
+                <li>Identify and address modifiable risk factors (e.g., adherence, inhaler technique, triggers).</li>
+                <li>Review and adjust the patient's ongoing controller treatment.</li>
+                <li>Assess if specialist referral is required for severe asthma management.</li>
+            </ul>
+        </div>
+      </div>
+
+      <div className="mt-6 space-y-3">
         <Button 
             onClick={() => navigateTo('ADULT_TREATMENT_PLAN_STEP')}
             variant="primary"
