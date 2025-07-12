@@ -3,19 +3,29 @@ import React, { ReactNode } from 'react';
 import { useNavigation } from '../../contexts/NavigationContext';
 import { useUIState } from '../../contexts/UIStateContext';
 import Button from '../ui/Button'; 
-import { ArrowLeft, RotateCcw, Info, BookOpen, MessageCircle, ShieldCheck, Stethoscope, ClipboardList, ShieldAlert } from 'lucide-react';
+import { ArrowLeft, RotateCcw, Info, BookOpen, MessageCircle, ShieldCheck, Stethoscope, ClipboardList, ShieldAlert, Users, Leaf, Home } from '../../constants/icons';
+import NonPharmacologicalStrategyContent from '../common/modal_content/NonPharmacologicalStrategyContent';
+import ClinicalPhenotypesContent from '../common/modal_content/ClinicalPhenotypesContent';
 
 const Header: React.FC = () => {
-  const { currentStepId, navigateTo } = useNavigation();
+  const { currentStepId, navigateTo, resetNavigation } = useNavigation();
 
   return (
-    <header className="bg-slate-900 text-white shadow-lg">
-      <div className="container mx-auto max-w-7xl p-4 flex items-center justify-between">
-        <div className="flex items-center">
-            <svg className="w-8 h-8 mr-3 text-sky-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm3 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-1.5 11.5c-2.03 0-3.8-1.1-4.75-2.82.16-.54.38-1.05.66-1.52.85-1.43 2.24-2.16 4.09-2.16s3.24.73 4.09 2.16c.28.47.5.98.66 1.52-1.05 1.72-2.81 2.82-4.75 2.82z" fill="currentColor"/></svg>
-            <h1 className="text-xl font-medium tracking-tight">Asthma : A Tool for using the GINA approach</h1>
+    <header className="bg-slate-900 text-white shadow-lg no-print">
+      <div className="container mx-auto max-w-7xl p-4 flex items-center gap-4">
+        <div className="flex items-center flex-1 min-w-0">
+            <svg className="w-8 h-8 mr-3 text-sky-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm3 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-1.5 11.5c-2.03 0-3.8-1.1-4.75-2.82.16-.54.38-1.05.66-1.52.85-1.43 2.24-2.16 4.09-2.16s3.24.73 4.09 2.16c.28.47.5.98.66 1.52-1.05 1.72-2.81 2.82-4.75 2.82z" fill="currentColor"/></svg>
+            <h1 className="text-xl font-medium tracking-tight truncate">Asthma : A Tool for using the GINA approach</h1>
         </div>
-        <div>
+        <div className="flex items-center flex-shrink-0 space-x-3">
+          <Button
+            onClick={resetNavigation}
+            leftIcon={<Home size={18} />}
+            aria-label="Go to Home"
+            className="bg-sky-500 hover:bg-sky-600 text-white focus:ring-sky-400"
+          >
+            Home
+          </Button>
           {currentStepId !== 'ABBREVIATIONS_STEP' && (
             <Button
               onClick={() => navigateTo('ABBREVIATIONS_STEP')}
@@ -34,7 +44,7 @@ const Header: React.FC = () => {
 
 const Footer: React.FC = () => {
   const { history, goBack, resetNavigation, currentStepId } = useNavigation();
-  const { openGoalsModal, openManagementPanel, openDiagnosisPanel, openSevereAsthmaPanel } = useUIState();
+  const { openGoalsModal, openManagementPanel, openDiagnosisPanel, openSevereAsthmaPanel, openInfoModal } = useUIState();
 
   const handleGoBack = () => {
     if (currentStepId === 'ABBREVIATIONS_STEP') {
@@ -52,7 +62,7 @@ const Footer: React.FC = () => {
 
 
   return (
-    <footer className="py-8">
+    <footer className="py-8 no-print">
       <div className="container mx-auto max-w-7xl px-4">
         <div className="flex justify-between items-center mb-8">
           {history.length > 1 ? (
@@ -79,41 +89,69 @@ const Footer: React.FC = () => {
               </Button>
             )}
              {currentStepId === 'INITIAL_STEP' && (
-                <>
-                 <Button
-                    onClick={openManagementPanel}
-                    variant="primary"
-                    leftIcon={<ClipboardList size={18} />}
-                    aria-label="Start Management Guide"
-                >
-                    Management
-                </Button>
-                <Button
-                    onClick={openDiagnosisPanel}
-                    variant="info"
-                    leftIcon={<Stethoscope size={18} />}
-                    aria-label="View GINA Initial Diagnosis Guide"
-                >
-                    Diagnosis
-                </Button>
-                <Button
-                    onClick={openSevereAsthmaPanel}
-                    variant="danger"
-                    leftIcon={<ShieldAlert size={18} />}
-                    aria-label="View Severe Asthma Guide"
-                >
-                    Severe Asthma
-                </Button>
-                </>
+                <div className="flex flex-wrap gap-3 justify-end">
+                  <Button
+                      onClick={openSevereAsthmaPanel}
+                      variant="danger"
+                      leftIcon={<ShieldAlert size={18} />}
+                      aria-label="View Severe Asthma Guide"
+                  >
+                      Severe Asthma
+                  </Button>
+                  <Button
+                      onClick={() => openInfoModal("Non Pharmacological Strategy", <NonPharmacologicalStrategyContent/>)}
+                      variant="primary"
+                      className="bg-lime-600 hover:bg-lime-700 focus:ring-lime-500"
+                      leftIcon={<Leaf size={18} />}
+                      aria-label="View Non Pharmacological Strategy"
+                  >
+                      Non Pharmacological Strategy
+                  </Button>
+                   <Button
+                      onClick={openManagementPanel}
+                      variant="primary"
+                      leftIcon={<ClipboardList size={18} />}
+                      aria-label="Start Management Guide"
+                  >
+                      Management
+                  </Button>
+                  <Button
+                      onClick={openDiagnosisPanel}
+                      variant="info"
+                      leftIcon={<Stethoscope size={18} />}
+                      aria-label="View GINA Initial Diagnosis Guide"
+                  >
+                      Diagnosis
+                  </Button>
+                   <Button
+                      onClick={() => openInfoModal("Clinical Asthma Phenotypes", <ClinicalPhenotypesContent />)}
+                      variant="primary"
+                      className="bg-teal-500 hover:bg-teal-600 focus:ring-teal-400"
+                      leftIcon={<Users size={18} />}
+                      aria-label="View Clinical Asthma Phenotypes"
+                  >
+                      Clinical Asthma Phenotypes
+                  </Button>
+                   <Button
+                      onClick={openGoalsModal}
+                      variant="success"
+                      leftIcon={<ShieldCheck size={18} />}
+                      aria-label="View GINA Goals of Management"
+                  >
+                      Goals
+                  </Button>
+                </div>
             )}
-             <Button
-                onClick={openGoalsModal}
-                variant="success"
-                leftIcon={<ShieldCheck size={18} />}
-                aria-label="View GINA Goals of Management"
-            >
-                Goals
-            </Button>
+            {currentStepId !== 'INITIAL_STEP' && (
+                 <Button
+                    onClick={openGoalsModal}
+                    variant="success"
+                    leftIcon={<ShieldCheck size={18} />}
+                    aria-label="View GINA Goals of Management"
+                >
+                    Goals
+                </Button>
+            )}
           </div>
         </div>
 
@@ -143,7 +181,7 @@ export const MainLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
         {children}
       </main>
       <Footer />
-      <div className="fixed bottom-6 right-6 z-30">
+      <div className="fixed bottom-6 right-6 z-30 no-print">
         <Button
             onClick={openAIPanel}
             variant="danger"

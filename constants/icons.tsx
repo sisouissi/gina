@@ -1,5 +1,6 @@
 
 export {
+  Home,
   Users,
   ChevronRight,
   ChevronLeft,
@@ -48,5 +49,7 @@ export {
   Biohazard,
   Check,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Printer,
+  Leaf,
 } from 'lucide-react';

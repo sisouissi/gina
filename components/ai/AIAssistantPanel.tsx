@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { useUIState } from '../../contexts/UIStateContext';
 import { useAIAssistant } from '../../hooks/useAIAssistant';
@@ -86,10 +87,10 @@ const AIAssistantPanel: React.FC = () => {
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         placeholder="Ask a question about the GINA guide..."
-                        className="flex-grow px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:outline-none text-sm"
+                        className="flex-grow px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors"
                         disabled={isLoading}
                     />
-                    <Button type="submit" disabled={isLoading || !inputValue.trim()} size="md" className="!py-2.5">
+                    <Button type="submit" disabled={isLoading} aria-label="Send message">
                         <Send size={18} />
                     </Button>
                 </form>

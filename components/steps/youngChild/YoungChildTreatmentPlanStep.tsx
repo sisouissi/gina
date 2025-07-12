@@ -1,6 +1,5 @@
 
 
-
 import React from 'react';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import { useNavigation } from '../../../contexts/NavigationContext';
@@ -8,7 +7,7 @@ import Card from '../../ui/Card';
 import Button from '../../ui/Button';
 import { youngChildTreatments } from '../../../constants/treatmentData';
 import { TreatmentDetail, YoungChildGinaSteps, YoungChildTreatmentStrategyKey, YoungChildStepTreatment, YoungChildAlternativeTreatment, ControlLevel } from '../../../types';
-import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Baby, Zap, HelpCircle, CheckCircle2, XCircle, ListChecks, Info, ShieldCheck } from 'lucide-react';
+import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Baby, Zap, HelpCircle, CheckCircle2, XCircle, ListChecks, Info, ShieldCheck, TrendingUp } from 'lucide-react';
 import DetailSection from '../../common/DetailSection';
 
 const YoungChildTreatmentPlanStep: React.FC = () => {
@@ -87,6 +86,13 @@ const YoungChildTreatmentPlanStep: React.FC = () => {
                 </h3>
             </div>
             <p className={`text-sm ${style.text} mt-2 pl-9`}>{advice[level]}</p>
+            <div className="mt-3 pl-9">
+                {(level === 'partlyControlled' || level === 'uncontrolled') && canStepUp && (
+                    <Button onClick={() => handleStepChange(youngChild_currentGinaStep + 1)} variant="warning" size="sm" leftIcon={<TrendingUp size={16} />}>
+                        Step-Up Treatment
+                    </Button>
+                )}
+            </div>
         </div>
     );
   };

@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { User, Baby } from '../../../constants/icons';
 
@@ -23,7 +22,7 @@ const Section: React.FC<{ title: string; icon: React.ReactElement; children: Rea
                 {clonedIcon}
                 {title}
             </h3>
-            <ul className="list-disc list-inside space-y-1 text-slate-700 text-sm pl-8">
+            <ul className="list-disc list-inside space-y-1 text-slate-700 text-sm pl-4">
                 {children}
             </ul>
         </div>
@@ -37,25 +36,30 @@ const Box13Content: React.FC = () => {
                 Consider alternative diagnoses, especially if symptoms are atypical, there is a poor response to treatment, or clinical suspicion is high for another condition. The differential varies by age.
             </p>
 
-            <Section title="Adults, Adolescents & Children 6-11" icon={<User className="text-sky-600" />}>
+            <Section title="Adults, adolescents & children 6–11 years" icon={<User className="text-sky-600" />}>
+                <li>Chronic upper airway cough syndrome</li>
+                <li>Inducible laryngeal obstruction (ILO)</li>
                 <li>Chronic obstructive pulmonary disease (COPD)</li>
-                <li>Vocal cord dysfunction (VCD) / Inducible laryngeal obstruction</li>
-                <li>Gastroesophageal reflux disease (GERD) with aspiration</li>
-                <li>Heart failure</li>
-                <li>Chronic rhinosinusitis / Post-nasal drip</li>
-                <li>Cystic fibrosis (milder forms)</li>
+                <li>Congestive heart failure</li>
                 <li>Bronchiectasis</li>
-                <li>Anxiety/panic attacks with hyperventilation</li>
+                <li>Cystic fibrosis</li>
+                <li>Primary ciliary dyskinesia</li>
+                <li>Tumors</li>
+                <li>Inhaled foreign body</li>
+                <li>Pulmonary embolism</li>
+                <li>Hyperventilation/dysfunctional breathing</li>
             </Section>
 
             <Section title="Children ≤5 years" icon={<Baby className="text-violet-600" />}>
-                <li>Recurrent viral respiratory infections (e.g., viral bronchiolitis)</li>
+                <li>Recurrent viral respiratory infections</li>
+                <li>Gastroesophageal reflux</li>
                 <li>Inhaled foreign body</li>
-                <li>Congenital airway abnormalities (e.g., tracheomalacia)</li>
-                <li>Gastroesophageal reflux (GER)</li>
+                <li>Tracheomalacia/bronchomalacia</li>
+                <li>Congenital heart disease</li>
                 <li>Cystic fibrosis</li>
                 <li>Primary ciliary dyskinesia</li>
-                <li>Immune deficiency</li>
+                <li>Bronchopulmonary dysplasia</li>
+                <li>Tuberculosis</li>
             </Section>
         </div>
     );

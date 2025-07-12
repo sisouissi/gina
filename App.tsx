@@ -48,13 +48,8 @@ import YoungChildExacerbationIntroStep from './components/steps/youngChild/Young
 import YoungChildExacerbationSeverityStep from './components/steps/youngChild/YoungChildExacerbationSeverityStep';
 import YoungChildExacerbationPlanStep from './components/steps/youngChild/YoungChildExacerbationPlanStep';
 
-// Severe Asthma Steps
-import DecisionTreeStep1 from './components/steps/severe_asthma/DecisionTreeStep1';
-import DecisionTreeStep2 from './components/steps/severe_asthma/DecisionTreeStep2';
-import DecisionTreeStep3 from './components/steps/severe_asthma/DecisionTreeStep3';
-import DecisionTreeStep4 from './components/steps/severe_asthma/DecisionTreeStep4';
-import PhenotypeStep from './components/steps/severe_asthma/PhenotypeStep';
-import BiologicSelectionStep from './components/steps/severe_asthma/BiologicSelectionStep';
+// Severe Asthma Container
+import SevereAsthmaPathway from './components/steps/severe_asthma/SevereAsthmaPathway';
 
 
 const StepRenderer: React.FC = () => {
@@ -132,20 +127,19 @@ const StepRenderer: React.FC = () => {
     case 'YOUNG_CHILD_EXACERBATION_PLAN_STEP':
       return <YoungChildExacerbationPlanStep />;
       
-    // Severe Asthma Pathway
-    case 'SEVERE_ASTHMA_DECISION_TREE_STEP_1':
-      return <DecisionTreeStep1 />;
-    case 'SEVERE_ASTHMA_DECISION_TREE_STEP_2':
-      return <DecisionTreeStep2 />; // New 'Investigate' step
-    case 'SEVERE_ASTHMA_PHENOTYPE_STEP':
-      return <PhenotypeStep />; // Repurposed 'Assess Biomarkers' step (now Step 3)
-    case 'SEVERE_ASTHMA_DECISION_TREE_STEP_3':
-      return <DecisionTreeStep3 />; // Old step 3 becomes step 4
-    case 'SEVERE_ASTHMA_DECISION_TREE_STEP_4':
-      return <DecisionTreeStep4 />; // Old step 4 becomes step 5
-    case 'SEVERE_ASTHMA_BIOLOGIC_SELECTION_STEP':
-      return <BiologicSelectionStep />;
-
+    // Severe Asthma Pathway (11-Stage Flow)
+    case 'SEVERE_ASTHMA_STAGE_1':
+    case 'SEVERE_ASTHMA_STAGE_2':
+    case 'SEVERE_ASTHMA_STAGE_3':
+    case 'SEVERE_ASTHMA_STAGE_4':
+    case 'SEVERE_ASTHMA_STAGE_5':
+    case 'SEVERE_ASTHMA_STAGE_6':
+    case 'SEVERE_ASTHMA_STAGE_7':
+    case 'SEVERE_ASTHMA_STAGE_8':
+    case 'SEVERE_ASTHMA_STAGE_9':
+    case 'SEVERE_ASTHMA_STAGE_10':
+    case 'SEVERE_ASTHMA_STAGE_11':
+      return <SevereAsthmaPathway />;
 
     default:
       return <InitialStep />;

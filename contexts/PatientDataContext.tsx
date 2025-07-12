@@ -1,6 +1,6 @@
 
-import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
-import { PatientData, initialPatientData } from '../types';
+import React, { createContext, useState, useContext, ReactNode, useCallback, useEffect } from 'react';
+import { PatientData, initialPatientData, SevereAsthmaAssessmentResults } from '../types';
 
 interface PatientDataContextType {
   patientData: PatientData;
@@ -20,6 +20,37 @@ export const PatientDataProvider: React.FC<{ children: ReactNode }> = ({ childre
   const resetPatientData = useCallback(() => {
     setPatientData(initialPatientData);
   }, []);
+
+  useEffect(() => {
+    const { symptoms, medications, biomarkers, basicInfo } = patientData.severeAsthma;
+    const currentAssessment = patientData.severeAsthmaAssessment;
+
+    const newResults: SevereAsthmaAssessmentResults = { ...currentAssessment };
+
+    newResults.difficultToTreat = symptoms.poorControl || symptoms.frequentExacerbations || (medications.icsLaba && medications.icsDose === 'high');
+    
+    newResults.severeAsthma = (symptoms.poorControl || symptoms.frequentExacerbations) && 
+                              medications.icsLaba && 
+                              medications.adherence === 'good' &&
+                              medications.inhalerTechnique === 'correct';
+
+    // Updated logic for Type 2 inflammation based on specific criteria
+    newResults.type2Inflammation = parseInt(biomarkers.bloodEosinophils) >= 150 || 
+                                   parseInt(biomarkers.feNo) > 25 ||
+                                   parseInt(biomarkers.sputumEosinophils) >= 2 ||
+                                   symptoms.allergenDriven;
+
+    newResults.eligibleForBiologics = newResults.severeAsthma && 
+                                      (newResults.type2Inflammation || medications.maintenanceOcs) &&
+                                      parseInt(basicInfo.exacerbationsLastYear) >= 1;
+
+    // Deep compare to prevent infinite loops from re-renders
+    if (JSON.stringify(newResults) !== JSON.stringify(currentAssessment)) {
+      updatePatientData({ severeAsthmaAssessment: newResults });
+    }
+    
+  }, [patientData.severeAsthma, updatePatientData]);
+
 
   return (
     <PatientDataContext.Provider value={{ patientData, updatePatientData, resetPatientData }}>

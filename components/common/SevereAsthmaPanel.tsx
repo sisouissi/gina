@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useNavigation } from '../../contexts/NavigationContext';
 import { useUIState } from '../../contexts/UIStateContext';
@@ -16,13 +17,13 @@ const SevereAsthmaPanel: React.FC = () => {
             <h2 className="text-lg font-semibold mb-5 text-slate-700">Severe Asthma Options:</h2>
             <div className="space-y-3">
                 <Button
-                    onClick={() => navigateTo('SEVERE_ASTHMA_DECISION_TREE_STEP_1')}
+                    onClick={() => navigateTo('SEVERE_ASTHMA_STAGE_1')}
                     leftIcon={<Route />}
                     variant="primary"
                     className="w-full justify-start !py-2.5"
-                    aria-label="Launch the Severe Asthma Decision Tree"
+                    aria-label="Launch the Severe Asthma Pathway"
                 >
-                    Decision Tree
+                    Severe Asthma Pathway
                 </Button>
                 <Button
                     onClick={() => openInfoModal("Other Treatments (Non-Type 2)", <NonT2TreatmentContent />)}
@@ -43,13 +44,13 @@ const SevereAsthmaPanel: React.FC = () => {
                     Non-biologic options (Type 2)
                 </Button>
                  <Button
-                    onClick={() => navigateTo('SEVERE_ASTHMA_BIOLOGIC_SELECTION_STEP')}
+                    onClick={() => navigateTo('SEVERE_ASTHMA_STAGE_8')}
                     leftIcon={<Biohazard />}
                     variant="secondary"
                     className="w-full justify-start !py-2.5"
                     aria-label="Guide to select Type 2-targeted biologic therapy"
                 >
-                    Type 2-targeted biologic therapy
+                    Biologic Therapy Guide
                 </Button>
             </div>
         </div>

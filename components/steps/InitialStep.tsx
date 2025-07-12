@@ -123,33 +123,6 @@ export const InitialStep: React.FC = () => {
                       </p>
                   </div>
               </Card>
-
-              <Card
-                  title="Clinical Asthma Phenotypes"
-                  icon={<Users className="text-teal-600" />}
-                  className="border-teal-200 bg-teal-50"
-              >
-                  <p className="text-slate-600 mb-4 leading-relaxed">
-                      Asthma is a heterogeneous disease with different underlying characteristics (phenotypes). Identifying a patient's phenotype can help guide treatment decisions, especially for severe asthma. Common clinical phenotypes include:
-                  </p>
-                  <ul className="list-disc list-inside space-y-2 text-slate-700 leading-relaxed">
-                      <li>
-                          <strong>Allergic Asthma:</strong> The most common phenotype, often starting in childhood. Associated with a personal or family history of atopic diseases (e.g., eczema, allergic rhinitis, food allergy). Usually shows evidence of eosinophilic airway inflammation.
-                      </li>
-                      <li>
-                          <strong>Non-allergic Asthma:</strong> Asthma that is not associated with allergy. The inflammatory profile of sputum may be eosinophilic, neutrophilic, mixed, or paucigranulocytic.
-                      </li>
-                      <li>
-                          <strong>Late-onset Asthma:</strong> Asthma that first develops in adulthood. These patients, particularly women, tend to be less allergic and may require higher doses of ICS or be refractory to corticosteroid treatment.
-                      </li>
-                      <li>
-                          <strong>Asthma with Fixed Airflow Limitation:</strong> Some patients with long-standing asthma develop airflow limitation that is not fully reversible, likely due to airway wall remodeling.
-                      </li>
-                       <li>
-                          <strong>Asthma with Obesity:</strong> Some obese patients with asthma have prominent respiratory symptoms and little eosinophilic airway inflammation.
-                      </li>
-                  </ul>
-              </Card>
           </div>
         )}
       </div>

@@ -1,10 +1,11 @@
 
+
 import React, { useState } from 'react';
 import { useNavigation } from '../../../contexts/NavigationContext';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import Card from '../../ui/Card';
 import Button from '../../ui/Button';
-import { AlertTriangle, ChevronRight, CheckSquare, Square } from 'lucide-react';
+import { AlertTriangle, ChevronRight, CheckSquare, Square } from '../../../constants/icons';
 
 const riskFactorsList = [
   { id: 'exacerbation_history', label: '≥1 severe exacerbation in the last year' },
@@ -34,7 +35,8 @@ const AdultRiskAssessmentStep: React.FC = () => {
   };
 
   return (
-    <Card title="Assess Risk Factors for Exacerbations" icon={<AlertTriangle className="text-amber-600" />}>
+    <Card title="Assess Risk Factors for Exacerbations" icon={<AlertTriangle className="text-amber-600" />}
+>
       <p className="mb-6 text-sm text-slate-600 leading-relaxed">
         Independently of symptom control, identify any modifiable risk factors for future exacerbations (based on GINA Box 2-2B). This will help guide pathway selection.
       </p>
@@ -68,7 +70,8 @@ const AdultRiskAssessmentStep: React.FC = () => {
       </div>
 
       <div className="mt-8">
-        <Button onClick={handleContinue} fullWidth size="xl" rightIcon={<ChevronRight />}>
+        <Button onClick={handleContinue} fullWidth size="xl" rightIcon={<ChevronRight />}
+>
           Continue to Pathway Selection
         </Button>
       </div>

@@ -7,7 +7,7 @@ import Card from '../../ui/Card';
 import Button from '../../ui/Button';
 import { childTreatments } from '../../../constants/treatmentData';
 import { TreatmentDetail, ChildGINASteps, ChildPathway, ControlLevel } from '../../../types';
-import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Activity, Zap, ShieldCheck, BookOpen, CheckCircle2, XCircle, ListChecks, Info } from 'lucide-react';
+import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Activity, Zap, ShieldCheck, BookOpen, CheckCircle2, XCircle, ListChecks, Info, TrendingUp } from 'lucide-react';
 import DetailSection from '../../common/DetailSection';
 
 const ChildTreatmentPlanStep: React.FC = () => {
@@ -73,6 +73,13 @@ const ChildTreatmentPlanStep: React.FC = () => {
                 </h3>
             </div>
             <p className={`text-sm ${style.text} mt-2 pl-9`}>{advice[level]}</p>
+            <div className="mt-3 pl-9">
+                {(level === 'partlyControlled' || level === 'uncontrolled') && canStepUp && (
+                     <Button onClick={() => handleStepChange(child_currentGinaStep + 1)} variant="warning" size="sm" leftIcon={<TrendingUp size={16} />}>
+                        Step-Up Treatment
+                    </Button>
+                )}
+            </div>
         </div>
     );
   };

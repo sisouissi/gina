@@ -1,3 +1,4 @@
+
 export interface Abbreviation {
   abbr: string;
   full: string;

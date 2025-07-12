@@ -1,4 +1,3 @@
-
 export type AgeGroup = 'adult' | 'child' | 'youngChild';
 
 // Control Levels
@@ -35,6 +34,78 @@ export interface YoungChildDiagnosisCriteria {
 
 export type ExacerbationSeverity = 'mildModerate' | 'severe';
 
+// --- Severe Asthma Data Structure (New 11-stage flow) ---
+export interface SevereAsthmaBasicInfo {
+    age: string;
+    diagnosis: 'unconfirmed' | 'confirmed';
+    asthmaOnset: 'childhood' | 'adult';
+    exacerbationsLastYear: string;
+    hospitalizationsLastYear: string;
+    sabaUse: string;
+}
+
+export interface SevereAsthmaSymptoms {
+    poorControl: boolean;
+    frequentExacerbations: boolean;
+    nightWaking: boolean;
+    activityLimitation: boolean;
+    frequentSabaUse: boolean;
+    allergenDriven: boolean;
+}
+
+export interface SevereAsthmaMedications {
+    icsLaba: boolean;
+    icsDose: 'low' | 'medium' | 'high';
+    ocs: boolean;
+    maintenanceOcs: boolean;
+    ocsDose: string;
+    adherence: 'good' | 'suboptimal' | 'poor' | 'unknown';
+    inhalerTechnique: 'correct' | 'incorrect' | 'unknown';
+    mart: boolean;
+    lama: boolean;
+    ltra: boolean;
+    azithromycin: boolean;
+    biologicsAvailable: 'yes' | 'no' | null;
+}
+
+export interface SevereAsthmaBiomarkers {
+    bloodEosinophils: string;
+    feNo: string;
+    sputumEosinophils: string;
+    totalIgE: string;
+    specificIgE: boolean;
+    skinPrickTest: boolean;
+    fev1: string;
+    fev1Predicted: string;
+}
+
+export interface SevereAsthmaInvestigations {
+    chestXray: boolean;
+    hrct: boolean;
+    allergyTesting: boolean;
+    boneDensity: boolean;
+    parasiteScreen: boolean;
+    cardiacAssessment: boolean;
+}
+
+export interface SevereAsthmaPatientData {
+    basicInfo: SevereAsthmaBasicInfo;
+    symptoms: SevereAsthmaSymptoms;
+    medications: SevereAsthmaMedications;
+    biomarkers: SevereAsthmaBiomarkers;
+    comorbidities: string[];
+    riskFactors: string[];
+    investigations: SevereAsthmaInvestigations;
+}
+
+export interface SevereAsthmaAssessmentResults {
+    difficultToTreat: boolean;
+    severeAsthma: boolean;
+    type2Inflammation: boolean;
+    eligibleForBiologics: boolean;
+}
+
+
 export interface PatientData {
   age: string | null; // e.g., "12+ years", "6-11 years", "≤5 years"
   ageGroup: AgeGroup | null;
@@ -61,6 +132,10 @@ export interface PatientData {
   
   // Common for exacerbations
   exacerbationSeverity: ExacerbationSeverity | null;
+
+  // Severe Asthma
+  severeAsthma: SevereAsthmaPatientData;
+  severeAsthmaAssessment: SevereAsthmaAssessmentResults;
 }
 
 export const initialPatientData: PatientData = {
@@ -85,6 +160,22 @@ export const initialPatientData: PatientData = {
   youngChild_controlLevel: null,
 
   exacerbationSeverity: null,
+
+  severeAsthma: {
+    basicInfo: { age: '', diagnosis: 'unconfirmed', asthmaOnset: 'adult', exacerbationsLastYear: '', hospitalizationsLastYear: '', sabaUse: '' },
+    symptoms: { poorControl: false, frequentExacerbations: false, nightWaking: false, activityLimitation: false, frequentSabaUse: false, allergenDriven: false },
+    medications: { icsLaba: true, icsDose: 'high', ocs: false, maintenanceOcs: false, ocsDose: '', adherence: 'good', inhalerTechnique: 'correct', mart: false, lama: false, ltra: false, azithromycin: false, biologicsAvailable: null },
+    biomarkers: { bloodEosinophils: '', feNo: '', sputumEosinophils: '', totalIgE: '', specificIgE: false, skinPrickTest: false, fev1: '', fev1Predicted: '' },
+    comorbidities: [],
+    riskFactors: [],
+    investigations: { chestXray: false, hrct: false, allergyTesting: false, boneDensity: false, parasiteScreen: false, cardiacAssessment: false }
+  },
+  severeAsthmaAssessment: {
+    difficultToTreat: false,
+    severeAsthma: false,
+    type2Inflammation: false,
+    eligibleForBiologics: false
+  }
 };
 
 export type StepId =
@@ -124,13 +215,18 @@ export type StepId =
   | 'YOUNG_CHILD_EXACERBATION_INTRO_STEP'
   | 'YOUNG_CHILD_EXACERBATION_SEVERITY_STEP'
   | 'YOUNG_CHILD_EXACERBATION_PLAN_STEP'
-  // Severe Asthma
-  | 'SEVERE_ASTHMA_DECISION_TREE_STEP_1' // Confirm & Optimize
-  | 'SEVERE_ASTHMA_DECISION_TREE_STEP_2' // Investigate & Support
-  | 'SEVERE_ASTHMA_PHENOTYPE_STEP'         // Assess Biomarkers (now Step 3)
-  | 'SEVERE_ASTHMA_DECISION_TREE_STEP_3' // Choose Biologic (now Step 4)
-  | 'SEVERE_ASTHMA_DECISION_TREE_STEP_4' // Assess Response (now Step 5)
-  | 'SEVERE_ASTHMA_BIOLOGIC_SELECTION_STEP';
+  // Severe Asthma (11-Stage Flow)
+  | 'SEVERE_ASTHMA_STAGE_1'
+  | 'SEVERE_ASTHMA_STAGE_2'
+  | 'SEVERE_ASTHMA_STAGE_3'
+  | 'SEVERE_ASTHMA_STAGE_4'
+  | 'SEVERE_ASTHMA_STAGE_5'
+  | 'SEVERE_ASTHMA_STAGE_6'
+  | 'SEVERE_ASTHMA_STAGE_7'
+  | 'SEVERE_ASTHMA_STAGE_8'
+  | 'SEVERE_ASTHMA_STAGE_9'
+  | 'SEVERE_ASTHMA_STAGE_10'
+  | 'SEVERE_ASTHMA_STAGE_11';
 
 
 // Treatment data structures

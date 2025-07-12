@@ -73,7 +73,7 @@ const DiagnosisPanel: React.FC = () => {
                     Role of Type 2 Biomarkers
                 </Button>
                 <Button
-                    onClick={() => openInfoModal("Differential Diagnosis (Box 1-3)", <Box13Content />)}
+                    onClick={() => openInfoModal("Differential Diagnosis of Asthma (GINA 2025, Box 1-3)", <Box13Content />)}
                     leftIcon={<AlertTriangle />}
                     variant="secondary"
                     className="w-full justify-start !py-2.5"
