@@ -35,11 +35,11 @@ const ChildTreatmentPlanStep: React.FC = () => {
   const pathwayNameDisplay = child_pathway === 'track1' ? 'Track 1 (MART with ICS-formoterol)' : 'Track 2 (SABA Reliever)';
 
 
-  const canStepUp = child_currentGinaStep < 4;
-  const canStepDown = child_currentGinaStep > 1;
+  const canStepUp = child_currentGinaSteplower than 4;
+  const canStepDown = child_currentGinaStepgreater than 1;
 
   const handleStepChange = (newStep: number) => {
-    if (newStep >= 1 && newStep <= 4) {
+    if (newStep greater than or equal to  1 && newStep lower than or equal to  4) {
       updatePatientData({ 
         child_currentGinaStep: newStep as ChildGINASteps,
         child_controlLevel: null // Reset control level
@@ -107,7 +107,7 @@ const ChildTreatmentPlanStep: React.FC = () => {
                   <p>{treatment.reliever}</p>
                 </DetailSection>
               )}
-              {treatment.keyPoints && treatment.keyPoints.length > 0 && (
+              {treatment.keyPoints && treatment.keyPoints.lengthgreater than 0 && (
                 <DetailSection title="Key Points" icon={<Info className="text-sky-500"/>}>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     {treatment.keyPoints.map((point, index) => <li key={index}>{point}</li>)}

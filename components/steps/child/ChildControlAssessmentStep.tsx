@@ -61,7 +61,7 @@ const ChildControlAssessmentStep: React.FC = () => {
     let level: ControlLevel;
     if (score === 0) {
       level = 'wellControlled';
-    } else if (score >= 1 && score <= 2) {
+    } else if (score greater than or equal to  1 && score lower than or equal to  2) {
       level = 'partlyControlled';
     } else {
       level = 'uncontrolled';

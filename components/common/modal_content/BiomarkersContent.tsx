@@ -39,7 +39,7 @@ const BiomarkersContent: React.FC = () => {
             <BiomarkerCard title="Fractional Exhaled Nitric Oxide (FeNO)" icon={<Activity className="text-sky-600" />}>
                 <p>FeNO is a marker of eosinophilic airway inflammation.</p>
                 <ul className="list-disc list-inside">
-                    <li><strong>FeNO > 50 ppb:</strong> Strongly supports a diagnosis of eosinophilic asthma and likelihood of ICS response.</li>
+                    <li><strong>FeNOgreater than 50 ppb:</strong> Strongly supports a diagnosis of eosinophilic asthma and likelihood of ICS response.</li>
                     <li><strong>FeNO 25-50 ppb:</strong> Intermediate. May support diagnosis in the context of suggestive symptoms.</li>
                     <li><strong>FeNO &lt; 25 ppb:</strong> Low probability of eosinophilic inflammation. Does not rule out asthma, but suggests other mechanisms or non-adherence to ICS.</li>
                 </ul>

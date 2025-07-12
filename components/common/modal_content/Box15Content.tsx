@@ -28,7 +28,7 @@ const Step: React.FC<{
         <div className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-200 text-slate-600 font-bold text-lg">
           {stepNumber}
         </div>
-        {stepNumber < 5 && <div className="w-px h-12 bg-slate-300 my-1"></div>}
+        {stepNumberlower than 5 && <div className="w-px h-12 bg-slate-300 my-1"></div>}
       </div>
       <div className="flex-1 p-4 bg-white rounded-lg border border-slate-200 shadow-sm mt-1">
         <h3 className="font-semibold text-slate-800 mb-2 flex items-center text-md">
