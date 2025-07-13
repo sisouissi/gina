@@ -21,7 +21,7 @@ const InfoModal: React.FC = () => {
       role="dialog"
     >
         <div 
-            className="w-full max-w-2xl bg-slate-50 shadow-2xl rounded-lg z-50 flex flex-col transform transition-all duration-300 max-h-[90vh]"
+            className="w-full max-w-3xl bg-slate-50 shadow-2xl rounded-lg z-50 flex flex-col transform transition-all duration-300 max-h-[90vh]"
             onClick={e => e.stopPropagation()}
         >
             <header className="flex items-center justify-between p-4 bg-slate-800 text-white rounded-t-lg border-b border-slate-700 sticky top-0">

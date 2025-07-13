@@ -45,6 +45,7 @@ export {
   FlaskConical,
   TestTubeDiagonal,
   Beaker,
+  Bell,
   Biohazard,
   Check,
   ChevronDown,

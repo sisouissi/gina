@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import { useNavigation } from '../../../contexts/NavigationContext';
@@ -7,8 +6,9 @@ import Card from '../../ui/Card';
 import Button from '../../ui/Button';
 import { adultTreatments } from '../../../constants/treatmentData';
 import { TreatmentDetail, ControlLevel } from '../../../types';
-import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Zap, Wind, ShieldCheck, Route, FileText, Info, CheckCircle2, XCircle, ListChecks, TrendingDown, TrendingUp } from 'lucide-react';
+import { Pill, PlusCircle, MinusCircle, AlertTriangle, Wind, ShieldCheck, Route, FileText, Info, CheckCircle2, XCircle, TrendingDown, TrendingUp } from 'lucide-react';
 import DetailSection from '../../common/DetailSection';
+import ManagementCycleWidget from '../../common/ManagementCycleWidget';
 
 const AdultTreatmentPlanStep: React.FC = () => {
   const { patientData, updatePatientData } = usePatientData();
@@ -41,7 +41,8 @@ const AdultTreatmentPlanStep: React.FC = () => {
     if (newStep >= 1 && newStep <= 5) {
       updatePatientData({ 
         adult_currentGinaStep: newStep as 1 | 2 | 3 | 4 | 5,
-        adult_controlLevel: null // Reset control level when step is changed
+        adult_controlLevel: null, // Reset control level when step is changed
+        adult_reviewReminderDate: null,
       });
     }
   };
@@ -91,6 +92,8 @@ const AdultTreatmentPlanStep: React.FC = () => {
 
   return (
     <Card title="Adult Asthma Treatment Plan" icon={<Pill className="text-sky-600" />}>
+      <ManagementCycleWidget ageGroup="adult" />
+
       <div className="mb-6 p-4 bg-sky-50 border border-sky-200 rounded-lg">
         <p className="text-md font-semibold text-sky-700">{pathwayName}</p>
         <p className="text-2xl font-bold text-sky-800">{currentStepName}</p>
@@ -152,7 +155,7 @@ const AdultTreatmentPlanStep: React.FC = () => {
         </div>
       </div>
       
-      <div className="mt-8 space-y-4" >
+      <div className="mt-8 pt-4 border-t border-slate-200">
          <div>
             <h3 className="text-base font-semibold mb-2 text-center text-slate-700">Adjust Treatment Step:</h3>
             <div className="flex justify-center items-center space-x-3 mb-2">
@@ -181,30 +184,6 @@ const AdultTreatmentPlanStep: React.FC = () => {
             <p className="text-xs text-slate-500 text-center">
             Step up if poorly controlled. Step down if well controlled for 3 months. Review factors before stepping up.
             </p>
-        </div>
-        <div className="pt-4 border-t border-slate-200 space-y-3">
-             <Button 
-            onClick={() => navigateTo('ADULT_CONTROL_ASSESSMENT_STEP')} 
-            fullWidth 
-            variant="primary"
-            size="lg"
-            leftIcon={<ListChecks />}
-            rightIcon={<ChevronRight />}
-            aria-label="Assess current asthma control"
-            >
-            Assess Current Control
-            </Button>
-            <Button 
-            onClick={() => navigateTo('ADULT_EXACERBATION_INTRO_STEP')} 
-            fullWidth 
-            variant="warning" 
-            size="lg"
-            leftIcon={<Zap />}
-            rightIcon={<ChevronRight />}
-            aria-label="View exacerbation plan"
-            >
-            Manage Exacerbation
-            </Button>
         </div>
       </div>
     </Card>

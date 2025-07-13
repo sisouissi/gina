@@ -1,14 +1,14 @@
 
-
 import React from 'react';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import { useNavigation } from '../../../contexts/NavigationContext';
 import Card from '../../ui/Card';
 import Button from '../../ui/Button';
 import { youngChildTreatments } from '../../../constants/treatmentData';
-import { TreatmentDetail, YoungChildGinaSteps, YoungChildTreatmentStrategyKey, YoungChildStepTreatment, YoungChildAlternativeTreatment, ControlLevel } from '../../../types';
-import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Baby, Zap, HelpCircle, CheckCircle2, XCircle, ListChecks, Info, ShieldCheck, TrendingUp } from 'lucide-react';
+import { TreatmentDetail, YoungChildGinaSteps, YoungChildTreatmentStrategyKey, YoungChildStepTreatment, ControlLevel, YoungChildAlternativeTreatment } from '../../../types';
+import { Pill, PlusCircle, MinusCircle, AlertTriangle, Baby, Zap, HelpCircle, CheckCircle2, XCircle, Info, ShieldCheck, TrendingUp } from 'lucide-react';
 import DetailSection from '../../common/DetailSection';
+import ManagementCycleWidget from '../../common/ManagementCycleWidget';
 
 const YoungChildTreatmentPlanStep: React.FC = () => {
   const { patientData, updatePatientData } = usePatientData();
@@ -51,7 +51,8 @@ const YoungChildTreatmentPlanStep: React.FC = () => {
       updatePatientData({ 
         youngChild_currentGinaStep: newStep as YoungChildGinaSteps,
         youngChild_currentTreatmentStrategy: 'preferred',
-        youngChild_controlLevel: null
+        youngChild_controlLevel: null,
+        youngChild_reviewReminderDate: null,
       });
     }
   };
@@ -100,6 +101,8 @@ const YoungChildTreatmentPlanStep: React.FC = () => {
 
   return (
     <Card title="Treatment Plan (Young Child ≤5 years)" icon={<Baby className="text-violet-600" />}>
+      <ManagementCycleWidget ageGroup="youngChild" />
+      
       <div className="mb-6 p-4 bg-violet-50 border border-violet-200 rounded-lg">
         <p className="text-md font-semibold text-violet-700">{currentStepDisplay}</p>
         <p className="text-2xl font-bold text-violet-800">{activeStrategyName}</p>
@@ -214,31 +217,6 @@ const YoungChildTreatmentPlanStep: React.FC = () => {
             </div>
         </div>
       )}
-
-      <div className="mt-8 pt-6 border-t border-slate-200 space-y-3">
-        <Button 
-          onClick={() => navigateTo('YOUNG_CHILD_CONTROL_ASSESSMENT_STEP')}
-          fullWidth 
-          variant="violet"
-          size="lg"
-          leftIcon={<ListChecks />}
-          rightIcon={<ChevronRight />}
-          aria-label="Assess Current Control"
-        >
-          Assess Current Control
-        </Button>
-         <Button 
-          onClick={() => navigateTo('YOUNG_CHILD_EXACERBATION_INTRO_STEP')} 
-          fullWidth 
-          variant="warning"
-          size="lg"
-          leftIcon={<Zap />}
-          rightIcon={<ChevronRight />}
-          aria-label="View wheezing episode management plan"
-        >
-          Manage Wheezing Episode
-        </Button>
-      </div>
     </Card>
   );
 };

@@ -1,11 +1,12 @@
 
-
 import React, { useState } from 'react';
 import Card from '../../ui/Card';
 import Button from '../../ui/Button';
 import { useNavigation } from '../../../contexts/NavigationContext';
+import { useUIState } from '../../../contexts/UIStateContext';
 import { ControlLevel } from '../../../types';
 import { CheckCircle2, AlertTriangle, XCircle, ChevronRight, ListChecks } from 'lucide-react';
+import CACTModalContent from '../../common/modal_content/cACTModalContent';
 
 interface ControlQuestion {
   id: keyof ControlAnswers;
@@ -45,6 +46,7 @@ const questions: ControlQuestion[] = [
 
 const ChildControlAssessmentStep: React.FC = () => {
   const { navigateTo } = useNavigation();
+  const { openInfoModal } = useUIState();
   const [answers, setAnswers] = useState<ControlAnswers>({
     daytimeSymptoms: null,
     activityLimitation: null,
@@ -103,6 +105,15 @@ const ChildControlAssessmentStep: React.FC = () => {
         <Button onClick={assessAndNavigate} disabled={!allQuestionsAnswered} fullWidth rightIcon={<ChevronRight />} variant="success" size="xl">
           Complete Assessment & Review Plan
         </Button>
+      </div>
+
+      <div className="mt-8 pt-6 border-t border-slate-200">
+        <h3 className="font-semibold text-center text-slate-700 mb-3">Or use a validated tool for assessment and tracking:</h3>
+        <div className="flex justify-center gap-4">
+            <Button onClick={() => openInfoModal("Childhood Asthma Control Test (cACT)", <CACTModalContent />)} variant="violet" size="lg">
+                Take cACT
+            </Button>
+        </div>
       </div>
     </Card>
   );

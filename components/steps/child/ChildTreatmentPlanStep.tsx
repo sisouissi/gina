@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import { useNavigation } from '../../../contexts/NavigationContext';
@@ -7,8 +6,9 @@ import Card from '../../ui/Card';
 import Button from '../../ui/Button';
 import { childTreatments } from '../../../constants/treatmentData';
 import { TreatmentDetail, ChildGINASteps, ChildPathway, ControlLevel } from '../../../types';
-import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Activity, Zap, ShieldCheck, BookOpen, CheckCircle2, XCircle, ListChecks, Info, TrendingUp } from 'lucide-react';
+import { Pill, ChevronRight, PlusCircle, MinusCircle, AlertTriangle, Activity, Zap, ShieldCheck, BookOpen, CheckCircle2, XCircle, Info, TrendingUp } from 'lucide-react';
 import DetailSection from '../../common/DetailSection';
+import ManagementCycleWidget from '../../common/ManagementCycleWidget';
 
 const ChildTreatmentPlanStep: React.FC = () => {
   const { patientData, updatePatientData } = usePatientData();
@@ -42,7 +42,8 @@ const ChildTreatmentPlanStep: React.FC = () => {
     if (newStep >= 1 && newStep <= 4) {
       updatePatientData({ 
         child_currentGinaStep: newStep as ChildGINASteps,
-        child_controlLevel: null // Reset control level
+        child_controlLevel: null, // Reset control level
+        child_reviewReminderDate: null,
       });
     }
   };
@@ -86,6 +87,8 @@ const ChildTreatmentPlanStep: React.FC = () => {
 
   return (
     <Card title="Asthma Treatment Plan (Child 6-11 years)" icon={<Activity className="text-emerald-600" />}>
+      <ManagementCycleWidget ageGroup="child" />
+
       <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
         <p className="text-md font-semibold text-emerald-700">{pathwayNameDisplay}</p>
         <p className="text-2xl font-bold text-emerald-800">{currentStepName}</p>
@@ -158,8 +161,8 @@ const ChildTreatmentPlanStep: React.FC = () => {
         </ul>
       </div>
 
-      <div className="mt-8 space-y-4" >
-         <div>
+      <div className="mt-8 pt-4 border-t border-slate-200">
+        <div>
             <h3 className="text-base font-semibold mb-2 text-center text-slate-700">Adjust Treatment Step ({pathwayNameDisplay}):</h3>
             <div className="flex justify-center items-center space-x-3 mb-2">
             <Button 
@@ -187,30 +190,6 @@ const ChildTreatmentPlanStep: React.FC = () => {
             <p className="text-xs text-slate-500 text-center">
             Step up if poorly controlled. Step down if well controlled for 3 months. Inhaler technique and adherence are crucial.
             </p>
-        </div>
-        <div className="pt-4 border-t border-slate-200 space-y-3">
-            <Button 
-                onClick={() => navigateTo('CHILD_CONTROL_ASSESSMENT_STEP')}
-                fullWidth 
-                variant="success" 
-                size="lg"
-                leftIcon={<ListChecks />}
-                rightIcon={<ChevronRight />}
-                aria-label="Assess current asthma control"
-                >
-                Assess Current Control
-            </Button>
-            <Button 
-            onClick={() => navigateTo('CHILD_EXACERBATION_INTRO_STEP')} 
-            fullWidth 
-            variant="warning"
-            size="lg"
-            leftIcon={<Zap />}
-            rightIcon={<ChevronRight />}
-            aria-label="View exacerbation plan"
-            >
-            Manage Exacerbation
-            </Button>
         </div>
       </div>
     </Card>

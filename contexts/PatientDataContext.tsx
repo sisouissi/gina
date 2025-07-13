@@ -1,4 +1,5 @@
 
+
 import React, { createContext, useState, useContext, ReactNode, useCallback, useEffect } from 'react';
 import { PatientData, initialPatientData, SevereAsthmaAssessmentResults } from '../types';
 
@@ -11,14 +12,27 @@ interface PatientDataContextType {
 const PatientDataContext = createContext<PatientDataContextType | undefined>(undefined);
 
 export const PatientDataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [patientData, setPatientData] = useState<PatientData>(initialPatientData);
+  const [patientData, setPatientData] = useState<PatientData>({
+    ...initialPatientData,
+    actHistory: [],
+    acqHistory: [],
+    cactHistory: [],
+  });
 
   const updatePatientData = useCallback((updates: Partial<PatientData>) => {
     setPatientData(prevData => ({ ...prevData, ...updates }));
   }, []);
 
   const resetPatientData = useCallback(() => {
-    setPatientData(initialPatientData);
+    setPatientData({
+        ...initialPatientData,
+        actHistory: [],
+        acqHistory: [],
+        cactHistory: [],
+        adult_reviewReminderDate: null,
+        child_reviewReminderDate: null,
+        youngChild_reviewReminderDate: null,
+    });
   }, []);
 
   useEffect(() => {
