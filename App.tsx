@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { PatientDataProvider } from './contexts/PatientDataContext';
 import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
@@ -31,6 +32,7 @@ import AdultExacerbationPlanStep from './components/steps/adult/AdultExacerbatio
 // Child Steps
 import ChildDiagnosisStep from './components/steps/child/ChildDiagnosisStep';
 import ChildInitialAssessmentStep from './components/steps/child/ChildInitialAssessmentStep';
+import ChildRiskAssessmentStep from './components/steps/child/ChildRiskAssessmentStep';
 import ChildPathwaySelectionStep from './components/steps/child/ChildPathwaySelectionStep';
 import ChildTreatmentPlanStep from './components/steps/child/ChildTreatmentPlanStep';
 import ChildControlAssessmentStep from './components/steps/child/ChildControlAssessmentStep';
@@ -96,6 +98,8 @@ const StepRenderer: React.FC = () => {
       return <ChildDiagnosisStep />;
     case 'CHILD_INITIAL_ASSESSMENT_STEP':
       return <ChildInitialAssessmentStep />;
+    case 'CHILD_RISK_ASSESSMENT_STEP':
+      return <ChildRiskAssessmentStep />;
     case 'CHILD_PATHWAY_SELECTION_STEP': 
       return <ChildPathwaySelectionStep />;
     case 'CHILD_TREATMENT_PLAN_STEP':

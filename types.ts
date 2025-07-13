@@ -1,8 +1,16 @@
 
+
 export type AgeGroup = 'adult' | 'child' | 'youngChild';
 
 // Control Levels
 export type ControlLevel = 'wellControlled' | 'partlyControlled' | 'uncontrolled';
+
+// Test result history
+export interface TestResult {
+    date: string; // ISO string
+    score: number;
+}
+
 
 // Adult specific types
 export type AdultSymptomFrequency =
@@ -117,12 +125,16 @@ export interface PatientData {
   adult_controlLevel: ControlLevel | null;
   adult_pathway: AdultPathway | null;
   adult_currentGinaStep: 1 | 2 | 3 | 4 | 5 | null;
-  adult_riskFactors: string[] | null;
+  adult_riskFactors: string[];
+  adult_reviewReminderDate: string | null;
 
   // Child (6-11) specific
   child_currentGinaStep: ChildGINASteps | null;
   child_pathway: ChildPathway | null;
   child_controlLevel: ControlLevel | null;
+  child_riskFactors: string[];
+  child_reviewReminderDate: string | null;
+
 
   // Young Child (<=5) specific
   youngChild_symptomPattern: YoungChildSymptomPattern | null;
@@ -130,6 +142,7 @@ export interface PatientData {
   youngChild_currentTreatmentStrategy: YoungChildTreatmentStrategyKey | null; 
   youngChild_diagnosisCriteria: YoungChildDiagnosisCriteria | null;
   youngChild_controlLevel: ControlLevel | null;
+  youngChild_reviewReminderDate: string | null;
   
   // Common for exacerbations
   exacerbationSeverity: ExacerbationSeverity | null;
@@ -137,6 +150,11 @@ export interface PatientData {
   // Severe Asthma
   severeAsthma: SevereAsthmaPatientData;
   severeAsthmaAssessment: SevereAsthmaAssessmentResults;
+
+  // Test Histories for longitudinal tracking
+  actHistory: TestResult[];
+  acqHistory: TestResult[];
+  cactHistory: TestResult[];
 }
 
 export const initialPatientData: PatientData = {
@@ -149,16 +167,20 @@ export const initialPatientData: PatientData = {
   adult_pathway: null,
   adult_currentGinaStep: null,
   adult_riskFactors: [],
+  adult_reviewReminderDate: null,
 
   child_currentGinaStep: null,
   child_pathway: null,
   child_controlLevel: null,
+  child_riskFactors: [],
+  child_reviewReminderDate: null,
 
   youngChild_symptomPattern: null,
   youngChild_currentGinaStep: null,
   youngChild_currentTreatmentStrategy: 'preferred',
   youngChild_diagnosisCriteria: { criterion1: false, criterion2: false, criterion3: false },
   youngChild_controlLevel: null,
+  youngChild_reviewReminderDate: null,
 
   exacerbationSeverity: null,
 
@@ -176,7 +198,11 @@ export const initialPatientData: PatientData = {
     severeAsthma: false,
     type2Inflammation: false,
     eligibleForBiologics: false
-  }
+  },
+
+  actHistory: [],
+  acqHistory: [],
+  cactHistory: [],
 };
 
 export type StepId =
@@ -201,6 +227,7 @@ export type StepId =
   // Child (6-11)
   | 'CHILD_DIAGNOSIS_STEP'
   | 'CHILD_INITIAL_ASSESSMENT_STEP'
+  | 'CHILD_RISK_ASSESSMENT_STEP'
   | 'CHILD_PATHWAY_SELECTION_STEP'
   | 'CHILD_TREATMENT_PLAN_STEP'
   | 'CHILD_CONTROL_ASSESSMENT_STEP'
