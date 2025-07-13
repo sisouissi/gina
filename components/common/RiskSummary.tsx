@@ -1,5 +1,5 @@
 
-import React, from 'react';
+import React from 'react';
 import { ShieldCheck, ShieldAlert } from '../../constants/icons';
 
 interface RiskSummaryProps {
