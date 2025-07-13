@@ -59,7 +59,7 @@ const AdultSymptomFrequencyStep: React.FC = () => {
         <FlowchartSection
           title="Markedly Uncontrolled Symptoms & High Risk"
           description={
-            <p>Patient has <strong>both</strong> a high symptom burden (symptoms daily or waking at night ≥1x/week) <strong>AND</strong> has low lung function or had a recent exacerbation.</p>
+            <p>{'Patient has '}<strong>both</strong>{' a high symptom burden (symptoms daily or waking at night once a week or more) '}<strong>AND</strong>{' has low lung function or had a recent exacerbation.'}</p>
           }
           startStep="Step 4"
           track1Treatment="Medium-dose ICS-formoterol MART"
@@ -110,7 +110,6 @@ const AdultSymptomFrequencyStep: React.FC = () => {
             variant="secondary"
             fullWidth
             rightIcon={<ChevronRight />}
-            className="text-slate-700"
             size="lg"
           >
             Select this presentation (Start at Step 2)
@@ -131,7 +130,6 @@ const AdultSymptomFrequencyStep: React.FC = () => {
             variant="secondary"
             fullWidth
             rightIcon={<ChevronRight />}
-            className="text-slate-700"
             size="lg"
           >
             Select this presentation (Start at Step 1)

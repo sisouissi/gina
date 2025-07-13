@@ -7,12 +7,20 @@ export const config = {
   runtime: 'edge',
 };
 
-if (!process.env.API_KEY) {
-  // This will cause the function to fail during initialization if the key is missing.
-  throw new Error("API_KEY environment variable is not set for the serverless function.");
+// This function will only run on the server, where process.env is available.
+// We wrap the initialization in a check to be robust, in case of build misconfigurations.
+let ai: GoogleGenAI | null = null;
+if (typeof window === 'undefined') {
+    if (!process.env.API_KEY) {
+        // This log helps in debugging Vercel environment variable setup.
+        console.error("API_KEY environment variable is not set for the serverless function.");
+        // We don't throw an error here to prevent build failures, 
+        // the handler will return an error response instead.
+    } else {
+        ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    }
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const systemInstructionText = `You are an expert AI assistant for healthcare professionals, specializing in the GINA (Global Initiative for Asthma) 2025 report. Your ONLY source of information is the GINA 2025 document provided below in the <document> tags.
 
@@ -31,6 +39,15 @@ ${GINA_DOCUMENT_TEXT}
 export default async function handler(req: Request) {
   if (req.method !== 'POST') {
     return new Response('Method Not Allowed', { status: 405 });
+  }
+  
+  // Check if the AI client was initialized (i.e., if API_KEY was available on the server).
+  if (!ai) {
+    console.error("AI client not initialized. Check API_KEY environment variable.");
+    return new Response(JSON.stringify({ error: "The AI service is not configured correctly on the server." }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   try {

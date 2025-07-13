@@ -17,7 +17,7 @@ const AdultExacerbationSeverityStep: React.FC = () => {
   const SeverityOptionCard: React.FC<{
     title: string;
     icon: React.ReactElement;
-    criteria: string[];
+    criteria: React.ReactNode[];
     buttonLabel: string;
     onClick: () => void;
     variant: 'warning' | 'danger';
@@ -80,7 +80,7 @@ const AdultExacerbationSeverityStep: React.FC = () => {
             "Accessory muscles not used",
             "Pulse 100-120 bpm",
             "SaO2 (on air) 90-95%",
-            "PEF >50% predicted or best",
+            "PEF > 50% predicted or best",
           ]}
           buttonLabel="Select Mild to Moderate"
           onClick={() => handleSeveritySelection('mildModerate')}
@@ -95,11 +95,11 @@ const AdultExacerbationSeverityStep: React.FC = () => {
             "Talks in words",
             "Sits hunched forwards",
             "Agitated",
-            "Respiratory rate >30/min",
+            "Respiratory rate > 30/min",
             "Accessory muscles used",
-            "Pulse >120 bpm",
-            "SaO2 (on air) <90%",
-            "PEF ≤50% predicted or best",
+            "Pulse > 120 bpm",
+            "SaO2 (on air) < 90%",
+            "PEF <= 50% predicted or best",
             "Life-threatening signs: Drowsiness, confusion, silent chest.",
           ]}
           buttonLabel="Select Severe"

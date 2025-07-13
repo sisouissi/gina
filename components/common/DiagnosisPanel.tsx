@@ -22,7 +22,8 @@ const DiagnosisPanel: React.FC = () => {
                     onClick={() => navigateTo('INITIAL_DIAGNOSIS_FLOWCHART_STEP')}
                     leftIcon={<Route />}
                     variant="primary"
-                    className="w-full justify-start !py-2.5"
+                    fullWidth
+                    justify="start"
                     aria-label="Making the initial diagnosis (Flowchart)"
                 >
                     Making the initial diagnosis
@@ -31,7 +32,8 @@ const DiagnosisPanel: React.FC = () => {
                     onClick={() => openInfoModal("Criteria for Initial Diagnosis (Box 1-2)", <Box12Content />)}
                     leftIcon={<FileText />}
                     variant="secondary"
-                    className="w-full justify-start !py-2.5"
+                    fullWidth
+                    justify="start"
                     aria-label="View criteria for initial diagnosis"
                 >
                     Criteria for initial diagnosis
@@ -40,7 +42,8 @@ const DiagnosisPanel: React.FC = () => {
                     onClick={() => openInfoModal("Patient Already on ICS Treatment (Box 1-4)", <Box14Content />)}
                     leftIcon={<ShieldAlert />}
                     variant="secondary"
-                    className="w-full justify-start !py-2.5"
+                    fullWidth
+                    justify="start"
                     aria-label="View guidance for patient already taking ICS-containing treatment"
                 >
                     Patient on ICS Treatment
@@ -49,7 +52,8 @@ const DiagnosisPanel: React.FC = () => {
                     onClick={() => openInfoModal("Confirming the Diagnosis (Box 1-5)", <Box15Content />)}
                     leftIcon={<ShieldCheck />}
                     variant="secondary"
-                    className="w-full justify-start !py-2.5"
+                    fullWidth
+                    justify="start"
                     aria-label="View step-wise approach to confirming the diagnosis"
                 >
                     Confirming the diagnosis
@@ -58,16 +62,18 @@ const DiagnosisPanel: React.FC = () => {
                     onClick={() => navigateTo('STEP_DOWN_ASSESS_STEP')}
                     leftIcon={<TrendingDown />}
                     variant="secondary"
-                    className="w-full justify-start !py-2.5"
-                    aria-label="View guide on how to step down ICS-containing treatment"
+                    fullWidth
+                    justify="start"
+                    aria-label="Step down ICS Treatment"
                 >
-                    How to step down ICS containing Treatment
+                    Step down ICS Treatment
                 </Button>
                 <Button
                     onClick={() => openInfoModal("Role of Type 2 Biomarkers", <BiomarkersContent />)}
                     leftIcon={<Activity />}
                     variant="secondary"
-                    className="w-full justify-start !py-2.5"
+                    fullWidth
+                    justify="start"
                     aria-label="View role of Type 2 biomarkers"
                 >
                     Role of Type 2 Biomarkers
@@ -76,7 +82,8 @@ const DiagnosisPanel: React.FC = () => {
                     onClick={() => openInfoModal("Differential Diagnosis of Asthma (GINA 2025, Box 1-3)", <Box13Content />)}
                     leftIcon={<AlertTriangle />}
                     variant="secondary"
-                    className="w-full justify-start !py-2.5"
+                    fullWidth
+                    justify="start"
                     aria-label="View differential diagnosis"
                 >
                     Differential diagnosis

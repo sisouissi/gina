@@ -53,22 +53,22 @@ const Box12Content: React.FC = () => {
          <p>Diagnosis should be confirmed with documented evidence of excessive variability in lung function. Any of the following can be used:</p>
           <ul className="space-y-2">
               <li><strong>Positive Bronchodilator (BD) Reversibility:</strong>
-                  <span className="block text-xs pl-4 text-slate-600">Adults: Increase in FEV1 >12% and >200mL. Children: Increase in FEV1 >12% of predicted.</span>
+                  <span className="block text-xs pl-4 text-slate-600">{'Adults: Increase in FEV1 >12% and >200mL. Children: Increase in FEV1 >12% of predicted.'}</span>
               </li>
               <li><strong>Excessive PEF Variability:</strong>
-                  <span className="block text-xs pl-4 text-slate-600">Adults: Daily diurnal variability >10%. Children: >13%.</span>
+                  <span className="block text-xs pl-4 text-slate-600">{'Adults: Daily diurnal variability >10%. Children: >13%.'}</span>
               </li>
               <li><strong>Significant FEV1 increase after 4 weeks of controller treatment:</strong>
-                   <span className="block text-xs pl-4 text-slate-600">Adults: Increase >12% and >200mL.</span>
+                   <span className="block text-xs pl-4 text-slate-600">{'Adults: Increase >12% and >200mL.'}</span>
               </li>
               <li><strong>Positive Exercise Challenge Test:</strong>
-                   <span className="block text-xs pl-4 text-slate-600">Adults: Fall in FEV1 >10% and >200mL. Children: Fall in FEV1 >12%.</span>
+                   <span className="block text-xs pl-4 text-slate-600">{'Adults: Fall in FEV1 >10% and >200mL. Children: Fall in FEV1 >12%.'}</span>
               </li>
               <li><strong>Positive Bronchial Challenge Test:</strong>
-                   <span className="block text-xs pl-4 text-slate-600">Fall in FEV1 ≥20% with methacholine/histamine.</span>
+                   <span className="block text-xs pl-4 text-slate-600">{'Fall in FEV1 >=20% with methacholine/histamine.'}</span>
               </li>
                <li><strong>Excessive Variation in Lung Function Between Visits:</strong>
-                   <span className="block text-xs pl-4 text-slate-600">Adults: Variation in FEV1 >12% and >200mL.</span>
+                   <span className="block text-xs pl-4 text-slate-600">{'Adults: Variation in FEV1 >12% and >200mL.'}</span>
               </li>
           </ul>
       </SectionCard>

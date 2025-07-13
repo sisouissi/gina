@@ -49,7 +49,7 @@ const ChildInitialAssessmentStep: React.FC = () => {
         <FlowchartSection
           title="Severe Presentation / High Risk"
           description={
-            <p>Symptoms most days or waking at night ≥1x/week, <strong>AND</strong> low lung function.</p>
+            <p>Symptoms most days or waking at night {'at least once per week'}, <strong>AND</strong> low lung function.</p>
           }
           startStep="Step 3/4"
           recommendedTreatment="Medium-dose ICS-LABA or medium-dose ICS. Consider referring for expert advice."
@@ -76,8 +76,7 @@ const ChildInitialAssessmentStep: React.FC = () => {
         >
           <Button
             onClick={() => handleSelection(3)}
-            variant="primary"
-            className="bg-orange-500 hover:bg-orange-600 focus:ring-orange-400"
+            variant="orange"
             fullWidth
             rightIcon={<ChevronRight />}
             size="lg"
@@ -96,8 +95,7 @@ const ChildInitialAssessmentStep: React.FC = () => {
         >
           <Button
             onClick={() => handleSelection(2)}
-            variant="secondary"
-            className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 focus:ring-yellow-300"
+            variant="yellow"
             fullWidth
             rightIcon={<ChevronRight />}
             size="lg"
@@ -120,7 +118,6 @@ const ChildInitialAssessmentStep: React.FC = () => {
             variant="secondary"
             fullWidth
             rightIcon={<ChevronRight />}
-            className="text-slate-700"
             size="lg"
           >
             Select Infrequent Symptoms

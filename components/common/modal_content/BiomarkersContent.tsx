@@ -39,9 +39,9 @@ const BiomarkersContent: React.FC = () => {
             <BiomarkerCard title="Fractional Exhaled Nitric Oxide (FeNO)" icon={<Activity className="text-sky-600" />}>
                 <p>FeNO is a marker of eosinophilic airway inflammation.</p>
                 <ul className="list-disc list-inside">
-                    <li><strong>FeNOgreater than 50 ppb:</strong> Strongly supports a diagnosis of eosinophilic asthma and likelihood of ICS response.</li>
+                    <li><strong>{'FeNO > 50 ppb:'}</strong> Strongly supports a diagnosis of eosinophilic asthma and likelihood of ICS response.</li>
                     <li><strong>FeNO 25-50 ppb:</strong> Intermediate. May support diagnosis in the context of suggestive symptoms.</li>
-                    <li><strong>FeNO &lt; 25 ppb:</strong> Low probability of eosinophilic inflammation. Does not rule out asthma, but suggests other mechanisms or non-adherence to ICS.</li>
+                    <li><strong>{'FeNO < 25 ppb:'}</strong> Low probability of eosinophilic inflammation. Does not rule out asthma, but suggests other mechanisms or non-adherence to ICS.</li>
                 </ul>
                 <p className="text-xs text-slate-500 mt-2">
                     Note: FeNO levels can be affected by smoking, diet, and medications.
@@ -51,9 +51,9 @@ const BiomarkersContent: React.FC = () => {
             <BiomarkerCard title="Blood Eosinophil Count" icon={<Droplets className="text-red-600" />}>
                 <p>A peripheral blood eosinophil count can also indicate Type 2 inflammation.</p>
                  <ul className="list-disc list-inside">
-                    <li><strong>Eosinophils ≥ 300 cells/µL:</strong> Considered a good predictor of ICS responsiveness. Supports a diagnosis of Type 2 asthma.</li>
+                    <li><strong>{'Eosinophils >= 300 cells/µL:'}</strong> Considered a good predictor of ICS responsiveness. Supports a diagnosis of Type 2 asthma.</li>
                     <li><strong>Eosinophils 150-300 cells/µL:</strong> Intermediate. May provide some support.</li>
-                    <li><strong>Eosinophils &lt; 150 cells/µL:</strong> Lower likelihood of a major response to ICS, but does not exclude asthma.</li>
+                    <li><strong>{'Eosinophils < 150 cells/µL:'}</strong> Lower likelihood of a major response to ICS, but does not exclude asthma.</li>
                 </ul>
                 <p className="text-xs text-slate-500 mt-2">
                     Note: Eosinophil counts can be variable and are influenced by factors like infections and OCS use.

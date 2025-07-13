@@ -11,7 +11,7 @@ const AdultPathwaySelectionStep: React.FC = () => {
   const { navigateTo } = useNavigation();
   const { patientData } = usePatientData();
 
-  const startingAtHigherStep = patientData.adult_currentGinaStep && patientData.adult_currentGinaStep greater than or equal to  3;
+  const startingAtHigherStep = patientData.adult_currentGinaStep && patientData.adult_currentGinaStep >= 3;
 
   const handlePathwaySelection = (pathway: AdultPathway) => {
     navigateTo('ADULT_TREATMENT_PLAN_STEP', { adult_pathway: pathway });

@@ -33,10 +33,10 @@ const ChildPathwaySelectionStep: React.FC = () => {
           <Button 
             onClick={() => handlePathwaySelection('track1')} 
             fullWidth 
-            variant="info" 
+            variant="teal" 
             rightIcon={<ChevronRight />}
             aria-label="Select Track 1 (MART)"
-            className="bg-teal-500 hover:bg-teal-600 focus:ring-teal-400 mt-auto"
+            className="mt-auto"
           >
             Choose Track 1 (MART)
           </Button>

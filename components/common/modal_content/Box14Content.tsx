@@ -27,7 +27,7 @@ const Box14Content: React.FC = () => {
                     If the patient is on low-dose controller, consider <strong>stopping the controller completely.</strong> This should be done with caution and close supervision.
                 </FlowStep>
                 <FlowStep>
-                    <strong>Measure FEV1 before and after stopping treatment.</strong> A significant decrease after cessation (<TrendingDown size={14} className="text-red-600"/>) and improvement on restarting (<TrendingUp size={14} className="text-emerald-600"/>) confirms the diagnosis.
+                    <strong>Measure FEV1 before and after stopping treatment.</strong>{' A significant decrease after cessation ('}<TrendingDown size={14} className="text-red-600"/>{') and improvement on restarting ('}<TrendingUp size={14} className="text-emerald-600"/>{') confirms the diagnosis.'}
                 </FlowStep>
                 <FlowStep>
                     If symptoms do not recur and lung function remains stable after stopping the controller for 2-4 weeks, the diagnosis of asthma is unlikely.

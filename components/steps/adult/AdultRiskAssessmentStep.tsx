@@ -8,11 +8,11 @@ import Button from '../../ui/Button';
 import { AlertTriangle, ChevronRight, CheckSquare, Square } from '../../../constants/icons';
 
 const riskFactorsList = [
-  { id: 'exacerbation_history', label: '≥1 severe exacerbation in the last year' },
-  { id: 'saba_overuse', label: 'High SABA use (>3 canisters/year)' },
+  { id: 'exacerbation_history', label: '1 or more severe exacerbations in the last year' },
+  { id: 'saba_overuse', label: 'High SABA use (more than 3 canisters/year)' },
   { id: 'poor_adherence', label: 'Known poor adherence to controller medication' },
   { id: 'inhaler_technique', label: 'Known incorrect inhaler technique' },
-  { id: 'low_fev1', label: 'Low lung function (e.g., FEV1 <60% predicted)' },
+  { id: 'low_fev1', label: 'Low lung function (e.g., FEV1 less than 60% predicted)' },
   { id: 'comorbidities', label: 'Significant comorbidities (obesity, rhinosinusitis, confirmed food allergy)' },
   { id: 'exposures', label: 'Significant exposure to smoke, allergens, or pollutants' },
   { id: 'psychosocial', label: 'Major psychological or socioeconomic problems' },

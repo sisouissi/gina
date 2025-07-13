@@ -17,7 +17,7 @@ const ChildExacerbationSeverityStep: React.FC = () => {
    const SeverityOptionCard: React.FC<{
     title: string;
     icon: React.ReactElement;
-    criteria: string[];
+    criteria: React.ReactNode[];
     buttonLabel: string;
     onClick: () => void;
     variant: 'warning' | 'danger';
@@ -76,8 +76,8 @@ const ChildExacerbationSeverityStep: React.FC = () => {
             "Not agitated",
             "Respiratory rate may be increased",
             "Mild or no retractions",
-            "Pulse usually <120-140 bpm (age-dependent)",
-            "SaO2 (on air) >92-94%",
+            "Pulse usually < 120-140 bpm (age-dependent)",
+            "SaO2 (on air) > 92-94%",
             "Responds well to SABA",
           ]}
           buttonLabel="Select Mild to Moderate"
@@ -92,10 +92,10 @@ const ChildExacerbationSeverityStep: React.FC = () => {
           criteria={[
             "Talks in words/short phrases, sits hunched",
             "May be agitated or distressed",
-            "Respiratory rate often >30-40/min (age-dependent)",
+            "Respiratory rate often > 30-40/min (age-dependent)",
             "Moderate to severe retractions, nasal flaring",
-            "Pulse often >140 bpm (age-dependent)",
-            "SaO2 (on air) ≤92%",
+            "Pulse often > 140 bpm (age-dependent)",
+            "SaO2 (on air) <= 92%",
             "Poor response to initial SABA",
             "Life-threatening signs: Drowsiness, confusion, silent chest, cyanosis, exhaustion.",
           ]}
