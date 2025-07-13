@@ -1,9 +1,8 @@
-
 import React, { ReactNode } from 'react';
 import { useNavigation } from '../../contexts/NavigationContext';
 import { useUIState } from '../../contexts/UIStateContext';
 import Button from '../ui/Button'; 
-import { ArrowLeft, RotateCcw, Info, BookOpen, MessageCircle, ShieldCheck, Stethoscope, ClipboardList, ShieldAlert, Users, Leaf, Home } from '../../constants/icons';
+import { ArrowLeft, RotateCcw, Info, BookOpen, MessageCircle, ShieldCheck, Stethoscope, ClipboardList, ShieldAlert, Users, Leaf, Home, Lightbulb } from '../../constants/icons';
 import NonPharmacologicalStrategyContent from '../common/modal_content/NonPharmacologicalStrategyContent';
 import ClinicalPhenotypesContent from '../common/modal_content/ClinicalPhenotypesContent';
 
@@ -14,7 +13,7 @@ const Header: React.FC = () => {
     <header className="bg-slate-900 text-white shadow-lg no-print">
       <div className="container mx-auto max-w-7xl p-4 flex items-center gap-4">
         <div className="flex items-center flex-1 min-w-0">
-            <svg className="w-8 h-8 mr-3 text-sky-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm3 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-1.5 11.5c-2.03 0-3.8-1.1-4.75-2.82.16-.54.38-1.05.66-1.52.85-1.43 2.24-2.16 4.09-2.16s3.24.73 4.09 2.16c.28.47.5.98.66 1.52-1.05 1.72-2.81 2.82-4.75 2.82z" fill="currentColor"/></svg>
+            <Lightbulb className="w-8 h-8 mr-3 text-amber-400 flex-shrink-0" />
             <h1 className="text-xl font-medium tracking-tight truncate">Asthma : A Tool for using the GINA approach</h1>
         </div>
         <div className="flex items-center flex-shrink-0 space-x-3">
