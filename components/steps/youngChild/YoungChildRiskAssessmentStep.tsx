@@ -4,14 +4,14 @@ import { useNavigation } from '../../../contexts/NavigationContext';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import Card from '../../ui/Card';
 import Button from '../../ui/Button';
-import { AlertTriangle, ChevronRight, CheckSquare, Square } from '../../../constants/icons';
-import { adultRiskFactorsList } from '../../../constants/riskFactorData';
+import { AlertTriangle, ChevronRight, CheckSquare, Square, Baby } from '../../../constants/icons';
+import { youngChildRiskFactorsList } from '../../../constants/riskFactorData';
 import RiskSummary from '../../common/RiskSummary';
 
-const AdultRiskAssessmentStep: React.FC = () => {
+const YoungChildRiskAssessmentStep: React.FC = () => {
   const { navigateTo } = useNavigation();
   const { patientData, updatePatientData } = usePatientData();
-  const [selectedFactors, setSelectedFactors] = useState<string[]>(patientData.adult_riskFactors || []);
+  const [selectedFactors, setSelectedFactors] = useState<string[]>(patientData.youngChild_riskFactors || []);
 
   const handleToggleFactor = (factorId: string) => {
     setSelectedFactors(prev =>
@@ -20,25 +20,25 @@ const AdultRiskAssessmentStep: React.FC = () => {
   };
 
   const handleContinue = () => {
-    updatePatientData({ adult_riskFactors: selectedFactors });
-    navigateTo('ADULT_SYMPTOM_FREQUENCY_STEP');
+    updatePatientData({ youngChild_riskFactors: selectedFactors });
+    navigateTo('YOUNG_CHILD_TREATMENT_PLAN_STEP');
   };
 
   const riskScore = useMemo(() => {
     return selectedFactors.reduce((score, factorId) => {
-      const factor = adultRiskFactorsList.find(f => f.id === factorId);
+      const factor = youngChildRiskFactorsList.find(f => f.id === factorId);
       return score + (factor ? factor.weight : 0);
     }, 0);
   }, [selectedFactors]);
 
   return (
-    <Card title="Assess Risk Factors for Exacerbations (Adults)" icon={<AlertTriangle className="text-amber-600" />}>
+    <Card title="Assess Risk Factors for Exacerbations (Child ≤5 years)" icon={<Baby className="text-violet-600" />}>
       <p className="mb-6 text-sm text-slate-600 leading-relaxed">
-        Independently of symptom control, identify any modifiable risk factors for future exacerbations (based on GINA Box 2-2B). This assessment will generate a risk profile to help guide treatment decisions.
+        Identify any modifiable risk factors for future wheezing episodes or exacerbations (based on GINA 2025, Box 11-1). This is a critical step for all children, regardless of symptom frequency.
       </p>
       
       <div className="space-y-2">
-        {adultRiskFactorsList.map((factor) => {
+        {youngChildRiskFactorsList.map((factor) => {
           const isSelected = selectedFactors.includes(factor.id);
           return (
             <div
@@ -48,13 +48,13 @@ const AdultRiskAssessmentStep: React.FC = () => {
               aria-checked={isSelected}
               className={`flex items-start p-3 rounded-lg cursor-pointer transition-all duration-200 border ${
                 isSelected 
-                ? 'bg-sky-50 border-sky-400' 
+                ? 'bg-violet-50 border-violet-400' 
                 : 'bg-white border-slate-300 hover:bg-slate-50'
               }`}
             >
               <div className="mt-0.5 mr-3">
                 {isSelected ? (
-                    <CheckSquare size={20} className="text-sky-600 flex-shrink-0" />
+                    <CheckSquare size={20} className="text-violet-600 flex-shrink-0" />
                 ) : (
                     <Square size={20} className="text-slate-400 flex-shrink-0" />
                 )}
@@ -70,12 +70,12 @@ const AdultRiskAssessmentStep: React.FC = () => {
       <RiskSummary score={riskScore} selectedFactors={selectedFactors} />
 
       <div className="mt-8">
-        <Button onClick={handleContinue} fullWidth size="xl" rightIcon={<ChevronRight />}>
-          Continue to Symptom Assessment
+        <Button onClick={handleContinue} fullWidth size="xl" rightIcon={<ChevronRight />} variant="violet">
+          Continue to Treatment Plan
         </Button>
       </div>
     </Card>
   );
 };
 
-export default AdultRiskAssessmentStep;
+export default YoungChildRiskAssessmentStep;

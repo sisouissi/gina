@@ -3,9 +3,10 @@ import React from 'react';
 import { useNavigation } from '../../contexts/NavigationContext';
 import { useUIState } from '../../contexts/UIStateContext';
 import Button from '../ui/Button';
-import { Route, FlaskConical, TestTubeDiagonal, Beaker, Biohazard } from 'lucide-react';
+import { Route, FlaskConical, TestTubeDiagonal, Beaker, Biohazard, Syringe } from 'lucide-react';
 import NonT2TreatmentContent from './modal_content/NonT2TreatmentContent';
 import NonBiologicT2TreatmentContent from './modal_content/NonBiologicT2TreatmentContent';
+import BiologicTherapiesGuideContent from './modal_content/BiologicTherapiesGuideContent';
 
 
 const SevereAsthmaPanel: React.FC = () => {
@@ -25,6 +26,16 @@ const SevereAsthmaPanel: React.FC = () => {
                     aria-label="Launch the Severe Asthma Pathway"
                 >
                     Severe Asthma Pathway
+                </Button>
+                <Button
+                    onClick={() => openInfoModal("Biologic Therapies Guide", <BiologicTherapiesGuideContent />)}
+                    leftIcon={<Syringe />}
+                    variant="secondary"
+                    fullWidth
+                    justify="start"
+                    aria-label="View the Biologic Therapies Guide"
+                >
+                    Biologic Therapies Guide
                 </Button>
                 <Button
                     onClick={() => openInfoModal("Other Treatments (Non-Type 2)", <NonT2TreatmentContent />)}

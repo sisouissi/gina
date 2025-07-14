@@ -52,4 +52,5 @@ export {
   ChevronUp,
   Printer,
   Leaf,
+  Syringe,
 } from 'lucide-react';

@@ -1,52 +1,49 @@
 
+
 import React, { useState } from 'react';
 import Card from '../../ui/Card';
 import Button from '../../ui/Button';
 import { useNavigation } from '../../../contexts/NavigationContext';
 import { useUIState } from '../../../contexts/UIStateContext';
-import { ControlLevel } from '../../../types';
+import { usePatientData } from '../../../contexts/PatientDataContext';
+import { ControlLevel, ControlAnswers } from '../../../types';
 import { CheckCircle2, AlertTriangle, XCircle, ChevronRight, ListChecks } from 'lucide-react';
 import CACTModalContent from '../../common/modal_content/cACTModalContent';
 
 interface ControlQuestion {
   id: keyof ControlAnswers;
   questionText: string;
-  options: { label: string; value: number }[];
-}
-
-interface ControlAnswers {
-  daytimeSymptoms: number | null;
-  activityLimitation: number | null;
-  nocturnalSymptoms: number | null;
-  relieverNeed: number | null;
+  options: { label: string; value: boolean }[];
 }
 
 const questions: ControlQuestion[] = [
   {
     id: 'daytimeSymptoms',
     questionText: 'In the past 4 weeks, has the child had daytime asthma symptoms more than twice a week?',
-    options: [{ label: 'Yes', value: 1 }, { label: 'No', value: 0 }],
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
   },
   {
     id: 'activityLimitation',
     questionText: 'In the past 4 weeks, has the child had any activity limitation due to asthma?',
-    options: [{ label: 'Yes', value: 1 }, { label: 'No', value: 0 }],
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
   },
   {
     id: 'nocturnalSymptoms',
     questionText: 'In the past 4 weeks, has the child had any night waking due to asthma?',
-    options: [{ label: 'Yes', value: 1 }, { label: 'No', value: 0 }],
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
   },
   {
     id: 'relieverNeed',
     questionText: 'In the past 4 weeks, has the child needed SABA reliever for symptoms more than twice a week?',
-    options: [{ label: 'Yes', value: 1 }, { label: 'No', value: 0 }],
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
   },
 ];
 
 const ChildControlAssessmentStep: React.FC = () => {
   const { navigateTo } = useNavigation();
   const { openInfoModal } = useUIState();
+  const { updatePatientData } = usePatientData();
+
   const [answers, setAnswers] = useState<ControlAnswers>({
     daytimeSymptoms: null,
     activityLimitation: null,
@@ -54,12 +51,12 @@ const ChildControlAssessmentStep: React.FC = () => {
     relieverNeed: null,
   });
 
-  const handleAnswerChange = (questionId: keyof ControlAnswers, value: number) => {
+  const handleAnswerChange = (questionId: keyof ControlAnswers, value: boolean) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
   };
 
   const assessAndNavigate = () => {
-    const score = Object.values(answers).reduce((acc, val) => acc + (val || 0), 0);
+    const score = Object.values(answers).filter(val => val === true).length;
     let level: ControlLevel;
     if (score === 0) {
       level = 'wellControlled';
@@ -68,7 +65,10 @@ const ChildControlAssessmentStep: React.FC = () => {
     } else {
       level = 'uncontrolled';
     }
-    navigateTo('CHILD_TREATMENT_PLAN_STEP', { child_controlLevel: level });
+    navigateTo('CHILD_TREATMENT_PLAN_STEP', { 
+        child_controlLevel: level,
+        child_controlAssessmentAnswers: answers 
+    });
   };
 
   const allQuestionsAnswered = Object.values(answers).every(ans => ans !== null);
@@ -86,9 +86,9 @@ const ChildControlAssessmentStep: React.FC = () => {
             <div className="flex space-x-2">
               {q.options.map(opt => (
                 <Button
-                  key={opt.value}
+                  key={String(opt.value)}
                   onClick={() => handleAnswerChange(q.id, opt.value)}
-                  variant={answers[q.id] === opt.value ? (opt.value === 1 ? 'warning' : 'success') : 'secondary'}
+                  variant={answers[q.id] === opt.value ? (opt.value === true ? 'warning' : 'success') : 'secondary'}
                   size="md"
                   fullWidth
                   aria-pressed={answers[q.id] === opt.value}

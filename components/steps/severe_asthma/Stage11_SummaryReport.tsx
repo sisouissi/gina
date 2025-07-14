@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { usePatientData } from '../../../contexts/PatientDataContext';
 import AssessmentCard from './AssessmentCard';
-import { User, Droplets, FlaskConical, ShieldAlert, CheckCircle, XCircle, FileText, ClipboardList } from 'lucide-react';
+import { User, Droplets, FlaskConical, ShieldAlert, CheckCircle, XCircle, FileText, ClipboardList, Printer } from 'lucide-react';
 import { getBiologicRecommendation } from '../../../constants/severeAsthmaData';
+import Button from '../../ui/Button';
 
 const SummarySection: React.FC<{ title: string; icon: React.ReactElement; children: React.ReactNode }> = ({ title, icon, children }) => (
     <div className="py-3 border-b border-slate-200 last:border-b-0">
@@ -39,9 +40,13 @@ const Stage11_SummaryReport: React.FC = () => {
     const { severeAsthma: data, severeAsthmaAssessment: assessment } = patientData;
     const topRecommendation = useMemo(() => getBiologicRecommendation(patientData)?.[0], [patientData]);
 
+    const handlePrint = () => {
+        window.print();
+    };
+
     return (
         <div id="summary-report-content">
-            <AssessmentCard title="Patient Summary Report" icon={<FileText />}>
+            <AssessmentCard title="Patient Summary Report" icon={<FileText />} className="printable-card">
                 <SummarySection title="Demographics & History" icon={<User />}>
                     <SummaryItem label="Age" value={data.basicInfo.age || 'N/A'} />
                     <SummaryItem label="Asthma Onset" value={data.basicInfo.asthmaOnset} />
@@ -88,6 +93,11 @@ const Stage11_SummaryReport: React.FC = () => {
                     </SummarySection>
                 )}
             </AssessmentCard>
+            <div className="mt-8 text-center no-print">
+                <Button onClick={handlePrint} variant="secondary" leftIcon={<Printer />}>
+                    Print Report
+                </Button>
+            </div>
         </div>
     );
 };

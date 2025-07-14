@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigation } from '../../../contexts/NavigationContext';
 import AssessmentCard from './AssessmentCard';
@@ -8,7 +7,7 @@ import { Heart, HelpCircle, CheckCircle2, XCircle, AlertTriangle, ArrowRight, Ch
 type EvaluationStep = 'initial' | 'unclear_followup' | 'good_response' | 'no_response';
 type ResponseType = 'good' | 'unclear' | 'no' | null;
 
-const Stage8_BiologicTherapy: React.FC = () => {
+export default function Stage8_BiologicTherapy() {
     const { navigateTo } = useNavigation();
     const [evaluationStep, setEvaluationStep] = useState<EvaluationStep>('initial');
     const [response, setResponse] = useState<ResponseType>(null);
@@ -38,9 +37,9 @@ const Stage8_BiologicTherapy: React.FC = () => {
                 Good Response to Biologic Therapy
             </h4>
             <div className="text-sm text-green-700 pl-7 space-y-2">
-                <p><strong>Poursuivre le traitement biologique</strong> et continuer le suivi régulier tous les 3 à 6 mois pour évaluer le contrôle de l’asthme, les exacerbations, la fonction pulmonaire, les comorbidités et la satisfaction du patient.</p>
-                <p><strong>Réduire progressivement les traitements d’appoint,</strong> en particulier les corticostéroïdes oraux (CSO) si le patient en prend, afin de limiter les effets secondaires. Cette réduction doit être prudente et individualisée.</p>
-                <p>Pour les corticostéroïdes inhalés (CSI), il est conseillé de maintenir au moins une <strong>dose modérée,</strong> avec possibilité de diminution après 3 à 6 mois de bonne réponse.</p>
+                <p><strong>Continue the biologic therapy</strong> and maintain regular follow-up every 3-6 months to assess asthma control, exacerbations, lung function, comorbidities, and patient satisfaction.</p>
+                <p><strong>Gradually reduce add-on treatments,</strong> especially oral corticosteroids (OCS) if the patient is taking them, to limit side effects. This reduction should be cautious and individualized.</p>
+                <p>For inhaled corticosteroids (ICS), it is advisable to maintain at least a <strong>moderate dose,</strong> with the possibility of reduction after 3-6 months of good response.</p>
             </div>
             <div className="pl-7 mt-4">
                 <Button onClick={() => navigateTo('SEVERE_ASTHMA_STAGE_9')} rightIcon={<ChevronRight/>}>
@@ -121,5 +120,3 @@ const Stage8_BiologicTherapy: React.FC = () => {
         </div>
     );
 };
-
-export default Stage8_BiologicTherapy;

@@ -1,4 +1,5 @@
 
+
 export interface RiskFactor {
   id: string;
   label: string;
@@ -29,4 +30,15 @@ export const childRiskFactorsList: RiskFactor[] = [
   { id: 'smoking_exposure', label: 'Exposure to tobacco smoke', weight: 1 },
   { id: 'allergen_exposure', label: 'High exposure to allergens (if sensitized)', weight: 1 },
   { id: 'obesity', label: 'Obesity', weight: 1 },
+];
+
+export const youngChildRiskFactorsList: RiskFactor[] = [
+  { id: 'yc_exacerbation_history', label: 'One or more severe exacerbations in the last 12 months', weight: 3 },
+  { id: 'yc_food_allergy', label: 'Confirmed diagnosis of food allergy', weight: 2 },
+  { id: 'yc_inhaler_technique', label: 'Incorrect inhaler technique (parent/carer)', weight: 2 },
+  { id: 'yc_adherence', label: 'Poor adherence to controller medication', weight: 2 },
+  { id: 'yc_psychosocial', label: 'Major psychological or socioeconomic problems for the family', weight: 2 },
+  { id: 'yc_smoking_exposure', label: 'Exposure to tobacco smoke', weight: 1 },
+  { id: 'yc_allergen_exposure', label: 'High exposure to allergens (if child is sensitized)', weight: 1 },
+  { id: 'yc_comorbidities', label: 'Other comorbidities (e.g., severe atopic dermatitis, obesity)', weight: 1 },
 ];

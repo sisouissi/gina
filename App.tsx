@@ -1,5 +1,6 @@
 
 
+
 import React from 'react';
 import { PatientDataProvider } from './contexts/PatientDataContext';
 import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
@@ -12,6 +13,7 @@ import AbbreviationsStep from './components/steps/common/AbbreviationsStep';
 import AIAssistantPanel from './components/ai/AIAssistantPanel';
 import GoalsModal from './components/common/GoalsModal';
 import InfoModal from './components/common/InfoModal';
+import PrintProfileModal from './components/common/PrintProfileModal';
 import InitialDiagnosisFlowchartStep from './components/steps/common/InitialDiagnosisFlowchartStep';
 import StepDownAssessStep from './components/steps/common/step_down/StepDownAssessStep';
 import StepDownAdjustStep from './components/steps/common/step_down/StepDownAdjustStep';
@@ -44,6 +46,7 @@ import ChildExacerbationPlanStep from './components/steps/child/ChildExacerbatio
 import YoungChildDiagnosisStep from './components/steps/youngChild/YoungChildDiagnosisStep';
 import YoungChildSuspectedAsthmaStep from './components/steps/youngChild/YoungChildSuspectedAsthmaStep';
 import YoungChildSymptomPatternStep from './components/steps/youngChild/YoungChildSymptomPatternStep';
+import YoungChildRiskAssessmentStep from './components/steps/youngChild/YoungChildRiskAssessmentStep';
 import YoungChildTreatmentPlanStep from './components/steps/youngChild/YoungChildTreatmentPlanStep';
 import YoungChildControlAssessmentStep from './components/steps/youngChild/YoungChildControlAssessmentStep';
 import YoungChildExacerbationIntroStep from './components/steps/youngChild/YoungChildExacerbationIntroStep';
@@ -120,6 +123,8 @@ const StepRenderer: React.FC = () => {
       return <YoungChildSuspectedAsthmaStep />;
     case 'YOUNG_CHILD_SYMPTOM_PATTERN_STEP':
       return <YoungChildSymptomPatternStep />;
+    case 'YOUNG_CHILD_RISK_ASSESSMENT_STEP':
+      return <YoungChildRiskAssessmentStep />;
     case 'YOUNG_CHILD_TREATMENT_PLAN_STEP':
       return <YoungChildTreatmentPlanStep />;
     case 'YOUNG_CHILD_CONTROL_ASSESSMENT_STEP':
@@ -161,6 +166,7 @@ const App: React.FC = () => {
           <AIAssistantPanel />
           <GoalsModal />
           <InfoModal />
+          <PrintProfileModal />
         </NavigationProvider>
       </UIStateProvider>
     </PatientDataProvider>

@@ -10,19 +10,10 @@ const AdultSymptomFrequencyStep: React.FC = () => {
   const { navigateTo } = useNavigation();
 
   const handleSelection = (frequency: AdultSymptomFrequency, initialGinaStep: 1 | 2 | 3 | 4) => {
-    // For milder presentations (Step 1 & 2), a detailed risk assessment is clinically useful before choosing a pathway.
-    // For more severe presentations (Step 3 & 4), high risk is already implied, so we can proceed to pathway selection.
-    if (initialGinaStep === 1 || initialGinaStep === 2) {
-      navigateTo('ADULT_RISK_ASSESSMENT_STEP', {
-        adult_symptomFrequency: frequency,
-        adult_currentGinaStep: initialGinaStep,
-      });
-    } else {
-      navigateTo('ADULT_PATHWAY_SELECTION_STEP', {
-        adult_symptomFrequency: frequency,
-        adult_currentGinaStep: initialGinaStep,
-      });
-    }
+    navigateTo('ADULT_PATHWAY_SELECTION_STEP', {
+      adult_symptomFrequency: frequency,
+      adult_currentGinaStep: initialGinaStep,
+    });
   };
 
   const FlowchartSection: React.FC<{
@@ -141,7 +132,7 @@ const AdultSymptomFrequencyStep: React.FC = () => {
         <div className="flex items-start">
           <HelpCircle size={18} className="mr-2 mt-0.5 text-slate-500 flex-shrink-0" />
           <p className="text-slate-600">
-            This flowchart guides the choice of the initial GINA step. For patients with milder symptoms (Steps 1 & 2), risk factors will be assessed next.
+            This flowchart guides the choice of the initial GINA step. After this, you will select the preferred treatment pathway.
           </p>
         </div>
       </div>

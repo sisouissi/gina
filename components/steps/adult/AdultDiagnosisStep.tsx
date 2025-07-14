@@ -12,7 +12,7 @@ const AdultDiagnosisStep: React.FC = () => {
 
   const handleDiagnosisConfirmation = (confirmed: boolean) => {
     if (confirmed) {
-      navigateTo('ADULT_SYMPTOM_FREQUENCY_STEP', { diagnosisConfirmed: true });
+      navigateTo('ADULT_RISK_ASSESSMENT_STEP', { diagnosisConfirmed: true });
     } else {
       navigateTo('DIAGNOSIS_PENDING_STEP', { diagnosisConfirmed: false });
     }

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { usePatientData } from '../../contexts/PatientDataContext';
 import { useNavigation } from '../../contexts/NavigationContext';
@@ -5,7 +6,7 @@ import { useUIState } from '../../contexts/UIStateContext';
 import { AgeGroup, ControlLevel } from '../../types';
 import Button from '../ui/Button';
 import SetReminderModalContent from './modal_content/SetReminderModalContent';
-import { ListChecks, Route, Calendar, Bell, XCircle, Info, Zap } from '../../constants/icons';
+import { ListChecks, Route, Calendar, Bell, XCircle, Info, Zap, Printer } from '../../constants/icons';
 
 interface ManagementCycleWidgetProps {
     ageGroup: AgeGroup;
@@ -14,7 +15,7 @@ interface ManagementCycleWidgetProps {
 const ManagementCycleWidget: React.FC<ManagementCycleWidgetProps> = ({ ageGroup }) => {
     const { patientData, updatePatientData } = usePatientData();
     const { navigateTo } = useNavigation();
-    const { openInfoModal } = useUIState();
+    const { openInfoModal, openPrintProfileModal } = useUIState();
 
     const controlLevel = patientData[`${ageGroup}_controlLevel` as const] as ControlLevel | null;
     const reminderDate = patientData[`${ageGroup}_reviewReminderDate` as const] as string | null;
@@ -82,6 +83,14 @@ const ManagementCycleWidget: React.FC<ManagementCycleWidgetProps> = ({ ageGroup 
                         aria-label="View exacerbation plan"
                     >
                         Manage Exacerbation
+                    </Button>
+                     <Button 
+                        onClick={openPrintProfileModal} 
+                        variant="teal"
+                        leftIcon={<Printer size={18} />}
+                        aria-label="Print Clinical Profile"
+                    >
+                        Print Profile
                     </Button>
                 </div>
 

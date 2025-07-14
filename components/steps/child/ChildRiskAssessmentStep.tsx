@@ -21,7 +21,7 @@ const ChildRiskAssessmentStep: React.FC = () => {
 
   const handleContinue = () => {
     updatePatientData({ child_riskFactors: selectedFactors });
-    navigateTo('CHILD_PATHWAY_SELECTION_STEP');
+    navigateTo('CHILD_INITIAL_ASSESSMENT_STEP');
   };
 
   const riskScore = useMemo(() => {
@@ -71,7 +71,7 @@ const ChildRiskAssessmentStep: React.FC = () => {
 
       <div className="mt-8">
         <Button onClick={handleContinue} fullWidth size="xl" rightIcon={<ChevronRight />} variant="success">
-          Continue to Pathway Selection
+          Continue to Initial Assessment
         </Button>
       </div>
     </Card>

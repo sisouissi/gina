@@ -10,7 +10,7 @@ const ChildInitialAssessmentStep: React.FC = () => {
   const { navigateTo } = useNavigation();
 
   const handleSelection = (initialGinaStep: ChildGINASteps) => {
-    navigateTo('CHILD_RISK_ASSESSMENT_STEP', {
+    navigateTo('CHILD_PATHWAY_SELECTION_STEP', {
       child_currentGinaStep: initialGinaStep,
     });
   };
@@ -129,7 +129,7 @@ const ChildInitialAssessmentStep: React.FC = () => {
         <div className="flex items-start">
           <HelpCircle size={18} className="mr-2 mt-0.5 text-slate-500 flex-shrink-0" />
           <p className="text-slate-600">
-            This flowchart guides the choice of the initial GINA treatment step. The next screen will assess specific risk factors.
+            This flowchart guides the choice of the initial GINA treatment step. The next screen will allow you to select a treatment pathway.
           </p>
         </div>
       </div>

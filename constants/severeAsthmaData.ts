@@ -43,7 +43,7 @@ export const biologicOptions = [
       name: "Omalizumab (Anti-IgE)",
       indication: "Severe allergic asthma",
       criteria: "Sensitization to inhaled allergens, Total IgE in dosing range, Exacerbations in last year",
-      predictors: "Childhood-onset asthma, Allergen-driven symptoms",
+      predictors: "Childhood-onset asthma, Allergen-driven symptoms, High FeNO",
       mechanism: "Binds free IgE, prevents FcεR1 binding",
       administration: "SC every 2-4 weeks, weight/IgE-based dosing",
       efficacy: "44% ↓ severe exacerbations, ↑ QoL",
@@ -62,6 +62,17 @@ export const biologicOptions = [
       safety: "Generally well tolerated, rare anaphylaxis"
     },
     {
+      name: "Reslizumab (Anti-IL5)",
+      indication: "Severe eosinophilic asthma (IV only)",
+      criteria: "Blood eosinophils >= 400/μL, Exacerbations in last year",
+      predictors: "Higher blood eosinophils, Adult-onset asthma",
+      mechanism: "Binds circulating IL-5",
+      administration: "3mg/kg IV every 4 weeks",
+      efficacy: "50-59% ↓ severe exacerbations, 75% ↓ OCS",
+      benefits: "None",
+      safety: "Myalgia, increased creatinine phosphokinase, rare anaphylaxis"
+    },
+    {
       name: "Benralizumab (Anti-IL5Rα)",
       indication: "Severe eosinophilic asthma",
       criteria: "Blood eosinophils 150-300/μL or more, Exacerbations in last year",
@@ -74,7 +85,7 @@ export const biologicOptions = [
     },
     {
       name: "Dupilumab (Anti-IL4Rα)",
-      indication: "Severe eosinophilic/Type 2 asthma",
+      indication: "Severe eosinophilic/Type 2 asthma or OCS-dependent",
       criteria: "Blood eosinophils 150/μL or more OR FeNO 25 ppb or more OR maintenance OCS",
       predictors: "Higher blood eosinophils, Higher FeNO",
       mechanism: "Blocks IL-4 and IL-13 signaling",
@@ -85,18 +96,18 @@ export const biologicOptions = [
     },
     {
       name: "Tezepelumab (Anti-TSLP)",
-      indication: "Severe asthma",
+      indication: "Severe asthma (all phenotypes)",
       criteria: "Severe exacerbations in last year",
       predictors: "Higher blood eosinophils, Higher FeNO",
       mechanism: "Binds circulating TSLP alarmin",
       administration: "210mg SC every 4 weeks",
       efficacy: "30-70% ↓ severe exacerbations",
-      benefits: "Effective regardless of allergic status",
+      benefits: "Effective regardless of allergic status or biomarker levels",
       safety: "Generally well tolerated, similar to placebo"
     }
 ];
 
-export const getBiologicRecommendation = (patientData: PatientData) => {
+export function getBiologicRecommendation(patientData: PatientData) {
     const { severeAsthma: data, severeAsthmaAssessment: assessmentResults } = patientData;
     
     if (!assessmentResults.eligibleForBiologics) {
@@ -221,4 +232,4 @@ export const getBiologicRecommendation = (patientData: PatientData) => {
     }
 
     return recommendations.sort((a, b) => b.score - a.score);
-};
+}

@@ -12,7 +12,7 @@ const ChildDiagnosisStep: React.FC = () => {
 
   const handleDiagnosisConfirmation = (confirmed: boolean) => {
     if (confirmed) {
-      navigateTo('CHILD_INITIAL_ASSESSMENT_STEP', { diagnosisConfirmed: true });
+      navigateTo('CHILD_RISK_ASSESSMENT_STEP', { diagnosisConfirmed: true });
     } else {
       navigateTo('DIAGNOSIS_PENDING_STEP', { diagnosisConfirmed: false });
     }

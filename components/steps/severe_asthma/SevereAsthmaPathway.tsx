@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigation } from '../../../contexts/NavigationContext';
 import { StepId } from '../../../types';
@@ -89,13 +88,13 @@ const SevereAsthmaPathway: React.FC = () => {
 
     return (
         <div className="max-w-7xl mx-auto">
-            <header className="bg-white rounded-lg shadow-md p-6 mb-6 text-center">
+            <header className="bg-white rounded-lg shadow-md p-6 mb-6 text-center no-print">
                 <h1 className="text-3xl font-bold text-red-800 mb-2">Severe Asthma Management System</h1>
                 <p className="text-gray-600">A GINA-based clinical decision support tool for difficult-to-treat and severe asthma</p>
             </header>
 
             <div className="flex flex-col lg:flex-row gap-6">
-                <div className="w-full lg:w-80 flex-shrink-0">
+                <div className="w-full lg:w-80 flex-shrink-0 no-print">
                     <div className="bg-white rounded-lg shadow-md p-4 sticky top-6">
                         <h2 className="text-lg font-semibold mb-4 text-center">Management Stages</h2>
                         <div className="space-y-2">
@@ -133,7 +132,7 @@ const SevereAsthmaPathway: React.FC = () => {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                    <div className="bg-white rounded-lg shadow-xl p-4 sm:p-6 md:p-8">
+                    <div className={`bg-white rounded-lg shadow-xl p-4 sm:p-6 md:p-8 ${currentStepId === 'SEVERE_ASTHMA_STAGE_11' ? 'printable-area' : ''}`}>
                         {renderCurrentStage()}
                     </div>
                 </div>

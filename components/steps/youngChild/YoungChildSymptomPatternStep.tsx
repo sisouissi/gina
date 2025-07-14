@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { useNavigation } from '../../../contexts/NavigationContext';
 import Card from '../../ui/Card';
@@ -13,7 +14,7 @@ const YoungChildSymptomPatternStep: React.FC = () => {
     pattern: YoungChildSymptomPattern, 
     initialGinaStep: YoungChildGinaSteps
   ) => {
-    navigateTo('YOUNG_CHILD_TREATMENT_PLAN_STEP', {
+    navigateTo('YOUNG_CHILD_RISK_ASSESSMENT_STEP', {
       youngChild_symptomPattern: pattern,
       youngChild_currentGinaStep: initialGinaStep,
       youngChild_currentTreatmentStrategy: 'preferred', 

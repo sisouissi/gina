@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import Card from '../../ui/Card';
 import Button from '../../ui/Button';
@@ -17,7 +18,7 @@ const YoungChildSuspectedAsthmaStep: React.FC = () => {
     pattern: YoungChildSymptomPattern,
     initialGinaStep: YoungChildGinaSteps
   ) => {
-    navigateTo('YOUNG_CHILD_TREATMENT_PLAN_STEP', {
+    navigateTo('YOUNG_CHILD_RISK_ASSESSMENT_STEP', {
       youngChild_symptomPattern: pattern,
       youngChild_currentGinaStep: initialGinaStep,
       youngChild_currentTreatmentStrategy: 'preferred',
