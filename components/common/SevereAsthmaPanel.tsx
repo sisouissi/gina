@@ -37,7 +37,7 @@ const SevereAsthmaPanel: React.FC = () => {
                     Other Treatments (non-Type 2)
                 </Button>
                  <Button
-                    onClick={() => openInfoModal("Non-Biologic Options (Type 2)", <NonBiologicT2TreatmentContent />)}
+                    onClick={() => openInfoModal("Non-biologic options (Type 2)", <NonBiologicT2TreatmentContent />)}
                     leftIcon={<Beaker />}
                     variant="secondary"
                     fullWidth
@@ -45,16 +45,6 @@ const SevereAsthmaPanel: React.FC = () => {
                     aria-label="View non-biologic options in Type 2 inflammation"
                 >
                     Non-biologic options (Type 2)
-                </Button>
-                 <Button
-                    onClick={() => navigateTo('SEVERE_ASTHMA_STAGE_8')}
-                    leftIcon={<Biohazard />}
-                    variant="secondary"
-                    fullWidth
-                    justify="start"
-                    aria-label="Guide to select Type 2-targeted biologic therapy"
-                >
-                    Biologic Therapy Guide
                 </Button>
             </div>
         </div>

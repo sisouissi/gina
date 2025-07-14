@@ -43,7 +43,7 @@ const YoungChildTreatmentPlanStep: React.FC = () => {
   
   const currentStepDisplay = currentStepDetails?.stepDescription || `GINA Step ${youngChild_currentGinaStep}`;
 
-  const canStepUp = youngChild_currentGinaStep < 3; // Step 4 is referral only
+  const canStepUp = youngChild_currentGinaStep < 4; // Step 4 is referral only
   const canStepDown = youngChild_currentGinaStep > 1;
 
   const handleStepChange = (newStep: number) => {

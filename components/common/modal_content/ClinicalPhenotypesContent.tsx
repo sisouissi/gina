@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Users, Stethoscope, TestTubeDiagonal, Activity, Droplets, ShieldAlert } from 'lucide-react';
+import { Users, Stethoscope, TestTubeDiagonal, Activity, ShieldAlert, ClipboardList } from 'lucide-react';
 
 const ClinicalPhenotypesContent: React.FC = () => {
 
@@ -7,7 +8,7 @@ const ClinicalPhenotypesContent: React.FC = () => {
   <div className="space-y-6">
             <div className="text-sm text-slate-600 leading-relaxed">
                 <p className="mb-4">
-                    Clinical asthma phenotypes are recognizable clusters of demographic, clinical, and/or pathophysiological characteristics that are often used in clinical practice (GINA 2025, Box 3-6).
+                    Clinical asthma phenotypes are recognizable clusters of demographic, clinical, and/or pathophysiological characteristics that are often used in clinical practice (GINA 2025, Table 1-2 & Box 3-6).
                 </p>
             </div>
 
@@ -31,6 +32,18 @@ const ClinicalPhenotypesContent: React.FC = () => {
                             <h3 className="font-semibold text-orange-800 mb-2">Non-allergic Asthma</h3>
                             <p className="text-sm text-orange-700 leading-relaxed">
                                 Some adults have asthma that is not associated with allergy. The sputum of these patients may be eosinophilic, neutrophilic, or contain only a few inflammatory cells (paucigranulocytic). Patients with non-allergic asthma often respond less well to inhaled corticosteroids.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-r-lg">
+                    <div className="flex items-start">
+                        <ClipboardList className="text-teal-600 mr-3 mt-1 flex-shrink-0" size={20} />
+                        <div>
+                            <h3 className="font-semibold text-teal-800 mb-2">Cough Variant Asthma</h3>
+                            <p className="text-sm text-teal-700 leading-relaxed">
+                                Cough is the only respiratory symptom. It is associated with airway eosinophilia and airway hyperresponsiveness. It often responds well to ICS.
                             </p>
                         </div>
                     </div>
