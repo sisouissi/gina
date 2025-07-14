@@ -52,6 +52,35 @@
     .animate-pulse-shadow {
       animation: pulse-shadow 2.5s infinite;
     }
+
+    /* Print-specific styles */
+    @media print {
+        body {
+            background-color: white !important;
+        }
+        .no-print {
+            display: none !important;
+        }
+        main {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        #root, #root > div, .min-h-screen {
+            display: block !important;
+            min-height: 0 !important;
+        }
+        .printable-area {
+            padding: 0 !important;
+            margin: 0 !important;
+            background-color: white !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        .printable-card {
+            box-shadow: none !important;
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+    }
   </style>
 <link rel="stylesheet" href="/index.css">
 </head>

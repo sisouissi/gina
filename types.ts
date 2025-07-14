@@ -11,6 +11,14 @@ export interface TestResult {
     score: number;
 }
 
+// Control Assessment detailed answers
+export interface ControlAnswers {
+  daytimeSymptoms: boolean | null;
+  activityLimitation: boolean | null;
+  nocturnalSymptoms: boolean | null;
+  relieverNeed: boolean | null;
+}
+
 
 // Adult specific types
 export type AdultSymptomFrequency =
@@ -123,6 +131,7 @@ export interface PatientData {
   // Adult specific
   adult_symptomFrequency: AdultSymptomFrequency | null;
   adult_controlLevel: ControlLevel | null;
+  adult_controlAssessmentAnswers: ControlAnswers | null;
   adult_pathway: AdultPathway | null;
   adult_currentGinaStep: 1 | 2 | 3 | 4 | 5 | null;
   adult_riskFactors: string[];
@@ -132,6 +141,7 @@ export interface PatientData {
   child_currentGinaStep: ChildGINASteps | null;
   child_pathway: ChildPathway | null;
   child_controlLevel: ControlLevel | null;
+  child_controlAssessmentAnswers: ControlAnswers | null;
   child_riskFactors: string[];
   child_reviewReminderDate: string | null;
 
@@ -142,6 +152,8 @@ export interface PatientData {
   youngChild_currentTreatmentStrategy: YoungChildTreatmentStrategyKey | null; 
   youngChild_diagnosisCriteria: YoungChildDiagnosisCriteria | null;
   youngChild_controlLevel: ControlLevel | null;
+  youngChild_controlAssessmentAnswers: ControlAnswers | null;
+  youngChild_riskFactors: string[];
   youngChild_reviewReminderDate: string | null;
   
   // Common for exacerbations
@@ -164,6 +176,7 @@ export const initialPatientData: PatientData = {
 
   adult_symptomFrequency: null,
   adult_controlLevel: null,
+  adult_controlAssessmentAnswers: null,
   adult_pathway: null,
   adult_currentGinaStep: null,
   adult_riskFactors: [],
@@ -172,6 +185,7 @@ export const initialPatientData: PatientData = {
   child_currentGinaStep: null,
   child_pathway: null,
   child_controlLevel: null,
+  child_controlAssessmentAnswers: null,
   child_riskFactors: [],
   child_reviewReminderDate: null,
 
@@ -180,6 +194,8 @@ export const initialPatientData: PatientData = {
   youngChild_currentTreatmentStrategy: 'preferred',
   youngChild_diagnosisCriteria: { criterion1: false, criterion2: false, criterion3: false },
   youngChild_controlLevel: null,
+  youngChild_controlAssessmentAnswers: null,
+  youngChild_riskFactors: [],
   youngChild_reviewReminderDate: null,
 
   exacerbationSeverity: null,
@@ -238,6 +254,7 @@ export type StepId =
   | 'YOUNG_CHILD_DIAGNOSIS_STEP'
   | 'YOUNG_CHILD_SUSPECTED_ASTHMA_STEP'
   | 'YOUNG_CHILD_SYMPTOM_PATTERN_STEP'
+  | 'YOUNG_CHILD_RISK_ASSESSMENT_STEP'
   | 'YOUNG_CHILD_TREATMENT_PLAN_STEP'
   | 'YOUNG_CHILD_CONTROL_ASSESSMENT_STEP'
   | 'YOUNG_CHILD_EXACERBATION_INTRO_STEP'

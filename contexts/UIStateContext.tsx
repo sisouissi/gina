@@ -1,4 +1,5 @@
 
+
 import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
 
 interface UIStateContextType {
@@ -15,6 +16,10 @@ interface UIStateContextType {
   infoModalContent: { title: string; content: React.ReactNode } | null;
   openInfoModal: (title: string, content: React.ReactNode) => void;
   closeInfoModal: () => void;
+
+  isPrintProfileModalOpen: boolean;
+  openPrintProfileModal: () => void;
+  closePrintProfileModal: () => void;
   
   activePanel: 'management' | 'diagnosis' | 'severeAsthma' | null;
   openManagementPanel: () => void;
@@ -31,6 +36,8 @@ export const UIStateProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   const [infoModalContent, setInfoModalContent] = useState<{ title: string; content: React.ReactNode } | null>(null);
   const [activePanel, setActivePanel] = useState<'management' | 'diagnosis' | 'severeAsthma' | null>(null);
+  const [isPrintProfileModalOpen, setIsPrintProfileModalOpen] = useState(false);
+
 
   const toggleAIPanel = useCallback(() => setIsAIPanelOpen(prev => !prev), []);
   const openAIPanel = useCallback(() => setIsAIPanelOpen(true), []);
@@ -50,6 +57,9 @@ export const UIStateProvider: React.FC<{ children: ReactNode }> = ({ children })
     setTimeout(() => setInfoModalContent(null), 300);
   }, []);
 
+  const openPrintProfileModal = useCallback(() => setIsPrintProfileModalOpen(true), []);
+  const closePrintProfileModal = useCallback(() => setIsPrintProfileModalOpen(false), []);
+
   const openManagementPanel = useCallback(() => setActivePanel('management'), []);
   const openDiagnosisPanel = useCallback(() => setActivePanel('diagnosis'), []);
   const openSevereAsthmaPanel = useCallback(() => setActivePanel('severeAsthma'), []);
@@ -60,6 +70,7 @@ export const UIStateProvider: React.FC<{ children: ReactNode }> = ({ children })
       isAIPanelOpen, toggleAIPanel, openAIPanel, closeAIPanel, 
       isGoalsModalOpen, openGoalsModal, closeGoalsModal,
       isInfoModalOpen, infoModalContent, openInfoModal, closeInfoModal,
+      isPrintProfileModalOpen, openPrintProfileModal, closePrintProfileModal,
       activePanel, openManagementPanel, openDiagnosisPanel, openSevereAsthmaPanel, closeSidePanel
     }}>
       {children}
